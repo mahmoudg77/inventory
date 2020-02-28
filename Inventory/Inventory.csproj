@@ -204,6 +204,7 @@
     <Content Include="Content\dist\css\alt\adminlte.pages.min.css" />
     <Content Include="Content\dist\css\alt\adminlte.plugins.css" />
     <Content Include="Content\dist\css\alt\adminlte.plugins.min.css" />
+    <Content Include="Content\dist\css\ionicons.min.css" />
     <Content Include="Content\dist\img\AdminLTELogo.png" />
     <Content Include="Content\dist\img\avatar.png" />
     <Content Include="Content\dist\img\avatar04.png" />
