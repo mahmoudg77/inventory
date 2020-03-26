@@ -1,0 +1,401 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="InventoryModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Assets">
+          <Key>
+            <PropertyRef Name="Ast_Id" />
+          </Key>
+          <Property Name="Ast_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ser_Num" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Mod_Num" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Ast_Type" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Cost" Type="int" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Created_By" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Updated_By" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Created_At" Type="datetime" Nullable="false" />
+          <Property Name="Updated_At" Type="datetime" Nullable="false" />
+          <Property Name="Is_Active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Departments">
+          <Key>
+            <PropertyRef Name="Dep_Id" />
+          </Key>
+          <Property Name="Dep_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Dep_Nam" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Created_By" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Updated_By" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Created_At" Type="datetime" Nullable="false" />
+          <Property Name="Updated_At" Type="datetime" Nullable="false" />
+          <Property Name="Priority" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Requests">
+          <Key>
+            <PropertyRef Name="Req_Id" />
+          </Key>
+          <Property Name="Req_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Usr_Id" Type="int" Nullable="false" />
+          <Property Name="Ast_Id" Type="int" Nullable="false" />
+          <Property Name="Tra_Id" Type="int" Nullable="false" />
+          <Property Name="Created_By" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Updated_By" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Created_At" Type="datetime" Nullable="false" />
+          <Property Name="Updated_At" Type="datetime" Nullable="false" />
+          <Property Name="Priority" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Transactions">
+          <Key>
+            <PropertyRef Name="Tra_Id" />
+          </Key>
+          <Property Name="Tra_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Created_By" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Updated_By" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Created_At" Type="datetime" Nullable="false" />
+          <Property Name="Updated_At" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Usr_Id" />
+          </Key>
+          <Property Name="Usr_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Usr_Type" Type="tinyint" Nullable="false" />
+          <Property Name="F_Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="L_Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Pho_Num" Type="nvarchar" MaxLength="13" Nullable="false" />
+          <Property Name="Dep_Id" Type="int" Nullable="false" />
+          <Property Name="Created_By" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Updated_By" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Created_At" Type="datetime" Nullable="false" />
+          <Property Name="Updated_At" Type="datetime" Nullable="false" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Requests_Transactions">
+          <End Role="Transactions" Type="Self.Transactions" Multiplicity="1" />
+          <End Role="Requests" Type="Self.Requests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Transactions">
+              <PropertyRef Name="Tra_Id" />
+            </Principal>
+            <Dependent Role="Requests">
+              <PropertyRef Name="Tra_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Requests_Users">
+          <End Role="Assets" Type="Self.Assets" Multiplicity="1" />
+          <End Role="Requests" Type="Self.Requests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Assets">
+              <PropertyRef Name="Ast_Id" />
+            </Principal>
+            <Dependent Role="Requests">
+              <PropertyRef Name="Ast_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Requests_Users1">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Requests" Type="Self.Requests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Usr_Id" />
+            </Principal>
+            <Dependent Role="Requests">
+              <PropertyRef Name="Usr_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_Departments">
+          <End Role="Departments" Type="Self.Departments" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="Dep_Id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="Dep_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="InventoryModelStoreContainer">
+          <EntitySet Name="Assets" EntityType="Self.Assets" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Departments" EntityType="Self.Departments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Requests" EntityType="Self.Requests" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Transactions" EntityType="Self.Transactions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Requests_Transactions" Association="Self.FK_Requests_Transactions">
+            <End Role="Transactions" EntitySet="Transactions" />
+            <End Role="Requests" EntitySet="Requests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Requests_Users" Association="Self.FK_Requests_Users">
+            <End Role="Assets" EntitySet="Assets" />
+            <End Role="Requests" EntitySet="Requests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Requests_Users1" Association="Self.FK_Requests_Users1">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Requests" EntitySet="Requests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Departments" Association="Self.FK_Users_Departments">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="InventoryModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Asset">
+          <Key>
+            <PropertyRef Name="Ast_Id" />
+          </Key>
+          <Property Name="Ast_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ser_Num" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Mod_Num" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Ast_Type" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Cost" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Created_By" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Updated_By" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Created_At" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Updated_At" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Is_Active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Requests" Relationship="Self.FK_Requests_Users" FromRole="Assets" ToRole="Requests" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="Dep_Id" />
+          </Key>
+          <Property Name="Dep_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Dep_Nam" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Created_By" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Updated_By" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Created_At" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Updated_At" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Priority" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Users_Departments" FromRole="Departments" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Request">
+          <Key>
+            <PropertyRef Name="Req_Id" />
+          </Key>
+          <Property Name="Req_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Usr_Id" Type="Int32" Nullable="false" />
+          <Property Name="Ast_Id" Type="Int32" Nullable="false" />
+          <Property Name="Tra_Id" Type="Int32" Nullable="false" />
+          <Property Name="Created_By" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Updated_By" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Created_At" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Updated_At" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Priority" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Asset" Relationship="Self.FK_Requests_Users" FromRole="Requests" ToRole="Assets" />
+          <NavigationProperty Name="Transaction" Relationship="Self.FK_Requests_Transactions" FromRole="Requests" ToRole="Transactions" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Requests_Users1" FromRole="Requests" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Transaction">
+          <Key>
+            <PropertyRef Name="Tra_Id" />
+          </Key>
+          <Property Name="Tra_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Created_By" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Updated_By" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Created_At" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Updated_At" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Requests" Relationship="Self.FK_Requests_Transactions" FromRole="Transactions" ToRole="Requests" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Usr_Id" />
+          </Key>
+          <Property Name="Usr_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Usr_Type" Type="Byte" Nullable="false" />
+          <Property Name="F_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="L_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Pho_Num" Type="String" MaxLength="13" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Dep_Id" Type="Int32" Nullable="false" />
+          <Property Name="Created_By" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Updated_By" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Created_At" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Updated_At" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Department" Relationship="Self.FK_Users_Departments" FromRole="Users" ToRole="Departments" />
+          <NavigationProperty Name="Requests" Relationship="Self.FK_Requests_Users1" FromRole="Users" ToRole="Requests" />
+        </EntityType>
+        <Association Name="FK_Requests_Users">
+          <End Role="Assets" Type="Self.Asset" Multiplicity="1" />
+          <End Role="Requests" Type="Self.Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Assets">
+              <PropertyRef Name="Ast_Id" />
+            </Principal>
+            <Dependent Role="Requests">
+              <PropertyRef Name="Ast_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_Departments">
+          <End Role="Departments" Type="Self.Department" Multiplicity="1" />
+          <End Role="Users" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="Dep_Id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="Dep_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Requests_Transactions">
+          <End Role="Transactions" Type="Self.Transaction" Multiplicity="1" />
+          <End Role="Requests" Type="Self.Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Transactions">
+              <PropertyRef Name="Tra_Id" />
+            </Principal>
+            <Dependent Role="Requests">
+              <PropertyRef Name="Tra_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Requests_Users1">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="Requests" Type="Self.Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Usr_Id" />
+            </Principal>
+            <Dependent Role="Requests">
+              <PropertyRef Name="Usr_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="InventoryEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Assets" EntityType="Self.Asset" />
+          <EntitySet Name="Departments" EntityType="Self.Department" />
+          <EntitySet Name="Requests" EntityType="Self.Request" />
+          <EntitySet Name="Transactions" EntityType="Self.Transaction" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK_Requests_Users" Association="Self.FK_Requests_Users">
+            <End Role="Assets" EntitySet="Assets" />
+            <End Role="Requests" EntitySet="Requests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Departments" Association="Self.FK_Users_Departments">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Requests_Transactions" Association="Self.FK_Requests_Transactions">
+            <End Role="Transactions" EntitySet="Transactions" />
+            <End Role="Requests" EntitySet="Requests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Requests_Users1" Association="Self.FK_Requests_Users1">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Requests" EntitySet="Requests" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="InventoryModelStoreContainer" CdmEntityContainer="InventoryEntities">
+          <EntitySetMapping Name="Assets">
+            <EntityTypeMapping TypeName="InventoryModel.Asset">
+              <MappingFragment StoreEntitySet="Assets">
+                <ScalarProperty Name="Ast_Id" ColumnName="Ast_Id" />
+                <ScalarProperty Name="Ser_Num" ColumnName="Ser_Num" />
+                <ScalarProperty Name="Mod_Num" ColumnName="Mod_Num" />
+                <ScalarProperty Name="Ast_Type" ColumnName="Ast_Type" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+                <ScalarProperty Name="Updated_By" ColumnName="Updated_By" />
+                <ScalarProperty Name="Created_At" ColumnName="Created_At" />
+                <ScalarProperty Name="Updated_At" ColumnName="Updated_At" />
+                <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Departments">
+            <EntityTypeMapping TypeName="InventoryModel.Department">
+              <MappingFragment StoreEntitySet="Departments">
+                <ScalarProperty Name="Dep_Id" ColumnName="Dep_Id" />
+                <ScalarProperty Name="Dep_Nam" ColumnName="Dep_Nam" />
+                <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+                <ScalarProperty Name="Updated_By" ColumnName="Updated_By" />
+                <ScalarProperty Name="Created_At" ColumnName="Created_At" />
+                <ScalarProperty Name="Updated_At" ColumnName="Updated_At" />
+                <ScalarProperty Name="Priority" ColumnName="Priority" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Requests">
+            <EntityTypeMapping TypeName="InventoryModel.Request">
+              <MappingFragment StoreEntitySet="Requests">
+                <ScalarProperty Name="Req_Id" ColumnName="Req_Id" />
+                <ScalarProperty Name="Usr_Id" ColumnName="Usr_Id" />
+                <ScalarProperty Name="Ast_Id" ColumnName="Ast_Id" />
+                <ScalarProperty Name="Tra_Id" ColumnName="Tra_Id" />
+                <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+                <ScalarProperty Name="Updated_By" ColumnName="Updated_By" />
+                <ScalarProperty Name="Created_At" ColumnName="Created_At" />
+                <ScalarProperty Name="Updated_At" ColumnName="Updated_At" />
+                <ScalarProperty Name="Priority" ColumnName="Priority" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Transactions">
+            <EntityTypeMapping TypeName="InventoryModel.Transaction">
+              <MappingFragment StoreEntitySet="Transactions">
+                <ScalarProperty Name="Tra_Id" ColumnName="Tra_Id" />
+                <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+                <ScalarProperty Name="Updated_By" ColumnName="Updated_By" />
+                <ScalarProperty Name="Created_At" ColumnName="Created_At" />
+                <ScalarProperty Name="Updated_At" ColumnName="Updated_At" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="InventoryModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Usr_Id" ColumnName="Usr_Id" />
+                <ScalarProperty Name="Usr_Type" ColumnName="Usr_Type" />
+                <ScalarProperty Name="F_Name" ColumnName="F_Name" />
+                <ScalarProperty Name="L_Name" ColumnName="L_Name" />
+                <ScalarProperty Name="Pho_Num" ColumnName="Pho_Num" />
+                <ScalarProperty Name="Dep_Id" ColumnName="Dep_Id" />
+                <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+                <ScalarProperty Name="Updated_By" ColumnName="Updated_By" />
+                <ScalarProperty Name="Created_At" ColumnName="Created_At" />
+                <ScalarProperty Name="Updated_At" ColumnName="Updated_At" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
