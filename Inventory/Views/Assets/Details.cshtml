@@ -3,96 +3,107 @@
 @{
     ViewBag.Title = "Details";
 }
+<style type="text/css">
+    dt {
+        padding-left: 5px;
+    }
 
-<h2>Details</h2>
+    dd {
+        padding-left: 5px;
+        background-color: #f5f6fa;
+    }
+</style>
+<section class="content">
+    <h2>Asset Details</h2>
+    <div class="card bg-white mb-3">
+        <div>
 
-<div>
-    <h4>Asset</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Ser_Num)
-        </dt>
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayName("Serial Number")
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Ser_Num)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Ser_Num)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Mod_Num)
-        </dt>
+                <dt>
+                    @Html.DisplayName("Model Number")
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Mod_Num)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Mod_Num)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Ast_Type)
-        </dt>
+                <dt>
+                    @Html.DisplayName("Asset Type")
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Ast_Type)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Ast_Type)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Cost)
-        </dt>
+                <dt>
+                    @Html.DisplayName("Cost")
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Cost)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Cost)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Date)
-        </dt>
+                <dt>
+                    @Html.DisplayName("Date")
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Date)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Date)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Created_By)
-        </dt>
+                <dt>
+                    @Html.DisplayName("Created By")
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Created_By)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Created_By)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Updated_By)
-        </dt>
+                <dt>
+                    @Html.DisplayName("Updated By")
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Updated_By)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Updated_By)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Created_At)
-        </dt>
+                <dt>
+                    @Html.DisplayName("Created At")
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Created_At)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Created_At)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Updated_At)
-        </dt>
+                <dt>
+                    @Html.DisplayName("Updated At")
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Updated_At)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Updated_At)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Is_Active)
-        </dt>
+                <dt>
+                    @Html.DisplayName("Is Active")
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Is_Active)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Is_Active)
+                </dd>
 
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Ast_Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+            </dl>
+        </div>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Ast_Id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</section>
