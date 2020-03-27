@@ -4,101 +4,119 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Delete</h2>
-
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Asset</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Ser_Num)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Ser_Num)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Mod_Num)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Mod_Num)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Ast_Type)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Ast_Type)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Cost)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Cost)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Date)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Date)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Created_By)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Created_By)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Updated_By)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Updated_By)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Created_At)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Created_At)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Updated_At)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Updated_At)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Is_Active)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Is_Active)
-        </dd>
-
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
-        </div>
+<style type="text/css">
+    dt {
+        padding-left: 5px;
     }
-</div>
+
+    dd {
+        padding-left: 5px;
+        background-color: #f5f6fa;
+    }
+</style>
+
+<section class="content">
+    <h2>Delete Asset</h2>
+    <div class="card bg-white mb-3">
+        <div>
+            <h3>Are you sure you want to delete this?</h3>
+            <dl class="dl-horizontal">
+
+                <dt>
+                    @Html.DisplayName("Serial Number")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Ser_Num)
+                </dd>
+
+                <dt>
+                    @Html.DisplayName("Model Number")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Mod_Num)
+                </dd>
+
+                <dt>
+                    @Html.DisplayName("Asset Type")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Ast_Type)
+                </dd>
+
+                <dt>
+                    @Html.DisplayName("Cost")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Cost)
+                </dd>
+
+                <dt>
+                    @Html.DisplayName("Date")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Date)
+                </dd>
+
+                <dt>
+                    @Html.DisplayName("Created By")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Created_By)
+                </dd>
+
+                <dt>
+                    @Html.DisplayName("Updated By")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Updated_By)
+                </dd>
+
+                <dt>
+                    @Html.DisplayName("Created At")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Created_At)
+                </dd>
+
+                <dt>
+                    @Html.DisplayName("Updated At")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Updated_At)
+                </dd>
+
+                <dt>
+                    @Html.DisplayName("Is Active")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Is_Active)
+                </dd>
+
+            </dl>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-actions no-color">
+                    <input type="submit" value="Delete" class="btn btn-default" />
+
+                </div>
+            }
+        </div>
+
+    </div>
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</section>

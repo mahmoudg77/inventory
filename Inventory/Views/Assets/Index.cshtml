@@ -4,84 +4,133 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<!-- Main content -->
+<section class="content">
+    <h2>Index</h2>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row justify-content-between">
+                        <div class="col-3">
+                            <p>
+                                @Html.ActionLink("Create New", "Create")
+                            </p>
+                        </div>
+                        <div class="col-3">
+                            <b> Search:</b>
+                            <input type="text" id="search" placeholder="Search Input..">
+                        </div>
+                    </div>
+                </div>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Ser_Num)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Mod_Num)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Ast_Type)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Cost)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Date)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Created_By)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Updated_By)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Created_At)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Updated_At)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Is_Active)
-        </th>
-        <th></th>
-    </tr>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <table id="example1" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.ActionLink("Serial Number", "Index", new { sortOrder = ViewBag.Ser_NumSortParm }, new { Style = "color:Black" })
+                                </th>
+                                <th>
+                                    @Html.ActionLink("Model Number", "Index", new { sortOrder = ViewBag.Mod_NumSortParm }, new { Style = "color:Black" })
+                                </th>
+                                <th>
+                                    @Html.ActionLink("Asset Type", "Index", new { sortOrder = ViewBag.Ast_TypeSortParm }, new { Style = "color:Black" })
+                                </th>
+                                <th>
+                                    @Html.ActionLink("Cost", "Index", new { sortOrder = ViewBag.CostSortParm }, new { Style = "color:Black" })
+                                </th>
+                                @*<th>
+                                    @Html.ActionLink("Date", "Index", new { sortOrder = ViewBag.DateSortParm }, new { Style = "color:Black" })
+                                </th>*@
+                                <th>
+                                    @Html.ActionLink("Created By", "Index", new { sortOrder = ViewBag.Created_BySortParm }, new { Style = "color:Black" })
+                                </th>
+                                <th>
+                                    @Html.ActionLink("Updated By", "Index", new { sortOrder = ViewBag.Updated_BySortParm }, new { Style = "color:Black" })
+                                </th>
+                                @*<th>
+                                    @Html.ActionLink("Created At", "Index", new { sortOrder = ViewBag.Created_AtSortParm }, new { Style = "color:Black" })
+                                </th>
+                                <th>
+                                    @Html.ActionLink("Updated At", "Index", new { sortOrder = ViewBag.Updated_AtSortParm }, new { Style = "color:Black" })
+                                </th>
+                                <th>
+                                    @Html.ActionLink("Is Active", "Index", new { sortOrder = ViewBag.Is_ActiveSortParm }, new { Style = "color:Black" })
+                                </th>*@
+                                <th>
+                                    Actions
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="searchin">
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Ser_Num)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Mod_Num)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Ast_Type)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Cost)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Date)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Created_By)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Updated_By)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Created_At)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Updated_At)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Is_Active)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Ast_Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Ast_Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Ast_Id })
-        </td>
-    </tr>
-}
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Ser_Num)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Mod_Num)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Ast_Type)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Cost)
+                                    </td>
+                                    @*<td>
+                                        @Html.DisplayFor(modelItem => item.Date)
+                                    </td>*@
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Created_By)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Updated_By)
+                                    </td>
+                                    @*<td>
+                                        @Html.DisplayFor(modelItem => item.Created_At)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Updated_At)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Is_Active)
+                                    </td>*@
+                                    <td>
+                                        @Html.ActionLink("Edit", "Edit", new { id = item.Ast_Id }) |
+                                        @Html.ActionLink("Details", "Details", new { id = item.Ast_Id }) |
+                                        @Html.ActionLink("Delete", "Delete", new { id = item.Ast_Id })
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
 
-</table>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+    </div>
+    <!-- /.col -->
+    <!-- /.row -->
+</section>
+<!-- /.Main content -->
+
+@Scripts.Render("~/Content/scripts")
+
+
+<!-- search scripts -->
+
+<script>
+        $("#search").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#searchin tr").filter(function () {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+    });
+</script>
+<!-- /.search scripts -->

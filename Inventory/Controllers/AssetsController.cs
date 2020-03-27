@@ -15,9 +15,99 @@ namespace Inventory.Controllers
         private InventoryEntities db = new InventoryEntities();
 
         // GET: Assets
-        public ActionResult Index()
+        //public ActionResult Index()
+        //{
+
+        //    return View(db.Assets.ToList());
+        //}
+
+        public ActionResult Index(string sortOrder, string search)
         {
-            return View(db.Assets.ToList());
+            //ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "test" : "";
+            ViewBag.Ast_IdSortParm = sortOrder == "Ast_Id" ? "Ast_Id_desc" : "Ast_Id";
+            ViewBag.Ser_NumSortParm = sortOrder == "Ser_Num" ? "Ser_Num_desc" : "Ser_Num";
+            ViewBag.Mod_NumSortParm = sortOrder == "Mod_Num" ? "Mod_Num_desc" : "Mod_Num";
+            ViewBag.Ast_TypeSortParm = sortOrder == "Ast_Type" ? "Ast_Type_desc" : "Ast_Type";
+            ViewBag.CostSortParm = sortOrder == "Cost" ? "Cost_desc" : "Cost";
+            ViewBag.DateSortParm = sortOrder == "Date" ? "Date_desc" : "Date";
+            ViewBag.Created_BySortParm = sortOrder == "Created_By" ? "Created_By_desc" : "Created_By";
+            ViewBag.Updated_BySortParm = sortOrder == "Updated_By" ? "Updated_By_desc" : "Updated_By";
+            ViewBag.Created_AtSortParm = sortOrder == "Created_At" ? "Created_At_desc" : "Created_At";
+            ViewBag.Updated_AtSortParm = sortOrder == "Updated_At" ? "Updated_At_desc" : "Updated_At";
+            ViewBag.Is_ActiveSortParm = sortOrder == "Is_Active" ? "Is_Active_desc" : "Is_Active";
+            var Assets = from s in db.Assets
+                         select s;
+            switch (sortOrder)
+            {
+                case "Ast_Id_desc":
+                    Assets = Assets.OrderByDescending(s => s.Ast_Id);
+                    break;
+                case "Ser_Num":
+                    Assets = Assets.OrderBy(s => s.Ser_Num);
+                    break;
+                case "Ser_Num_desc":
+                    Assets = Assets.OrderByDescending(s => s.Ser_Num);
+                    break;
+                case "Mod_Num":
+                    Assets = Assets.OrderBy(s => s.Mod_Num);
+                    break;
+                case "Mod_Num_desc":
+                    Assets = Assets.OrderByDescending(s => s.Mod_Num);
+                    break;
+                case "Ast_Type":
+                    Assets = Assets.OrderBy(s => s.Ast_Type);
+                    break;
+                case "Ast_Type_desc":
+                    Assets = Assets.OrderByDescending(s => s.Ast_Type);
+                    break;
+                case "Cost":
+                    Assets = Assets.OrderBy(s => s.Cost);
+                    break;
+                case "Cost_desc":
+                    Assets = Assets.OrderByDescending(s => s.Cost);
+                    break;
+                case "Date":
+                    Assets = Assets.OrderBy(s => s.Date);
+                    break;
+                case "Date_desc":
+                    Assets = Assets.OrderByDescending(s => s.Date);
+                    break;
+                case "Created_By":
+                    Assets = Assets.OrderBy(s => s.Created_By);
+                    break;
+                case "Created_By_desc":
+                    Assets = Assets.OrderByDescending(s => s.Created_By);
+                    break;
+                case "Updated_By":
+                    Assets = Assets.OrderBy(s => s.Updated_By);
+                    break;
+                case "Updated_By_desc":
+                    Assets = Assets.OrderByDescending(s => s.Updated_By);
+                    break;
+                case "Created_At":
+                    Assets = Assets.OrderBy(s => s.Created_At);
+                    break;
+                case "Created_At_desc":
+                    Assets = Assets.OrderByDescending(s => s.Created_At);
+                    break;
+                case "Updated_At":
+                    Assets = Assets.OrderBy(s => s.Updated_At);
+                    break;
+                case "Updated_At_desc":
+                    Assets = Assets.OrderByDescending(s => s.Updated_At);
+                    break;
+                case "Is_Active":
+                    Assets = Assets.OrderBy(s => s.Is_Active);
+                    break;
+                case "Is_Active_desc":
+                    Assets = Assets.OrderByDescending(s => s.Is_Active);
+                    break;
+
+                default:
+                    Assets = Assets.OrderBy(s => s.Ast_Id);
+                    break;
+            }
+            return View(Assets.ToList());
         }
 
         // GET: Assets/Details/5
