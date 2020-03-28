@@ -31,6 +31,8 @@ namespace Inventory.Models
         public System.DateTime Created_At { get; set; }
         public System.DateTime Updated_At { get; set; }
         public bool Status { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
     
         public virtual Department Department { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
