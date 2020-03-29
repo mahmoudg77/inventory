@@ -13,7 +13,7 @@
         <div class="card-body login-card-body">
             <p class="login-box-msg">Sign in to start your session</p>
 
-            <form action="" method="post">
+            <form action="/Users/Login@(HttpContext.Current.Request.QueryString.Get("next")!=null?"?next="+HttpContext.Current.Request.QueryString.Get("next"):"")" method="post">
                 @Html.AntiForgeryToken()
 
                 <div class="input-group mb-3">
@@ -32,13 +32,24 @@
                         </div>
                     </div>
                 </div>
+                <div class="input-group mb-3">
+                    <div class="g-recaptcha" data-sitekey="6Ld57OQUAAAAAJAISnQLlnI2GLiurwvTtHh4wQnD"></div>
+                </div>
+
                 <div class="row">
                     @if (ViewBag.error != null)
                     {
 
-                    <div class="col-12 alert alert-danger">
-                        @ViewBag.error
-                    </div>
+                        <div class="col-12 alert alert-danger">
+                            @ViewBag.error
+                        </div>
+                    }  
+                   @if (HttpContext.Current.Request.QueryString.Get("error")!=null)
+                    {
+
+                        <div class="col-12 alert alert-danger">
+                            @HttpContext.Current.Request.QueryString.Get("error")
+                        </div>
                     }
                     <div class="col-8">
                         <div class="icheck-primary">
@@ -57,26 +68,27 @@
             </form>
 
             @*<div class="social-auth-links text-center mb-3">
-                <p>- OR -</p>
-                <a href="#" class="btn btn-block btn-primary">
-                    <i class="fab fa-facebook mr-2"></i> Sign in using Facebook
-                </a>
-                <a href="#" class="btn btn-block btn-danger">
-                    <i class="fab fa-google-plus mr-2"></i> Sign in using Google+
-                </a>
-            </div>*@
+                    <p>- OR -</p>
+                    <a href="#" class="btn btn-block btn-primary">
+                        <i class="fab fa-facebook mr-2"></i> Sign in using Facebook
+                    </a>
+                    <a href="#" class="btn btn-block btn-danger">
+                        <i class="fab fa-google-plus mr-2"></i> Sign in using Google+
+                    </a>
+                </div>*@
             <!-- /.social-auth-links -->
 
             <p class="mb-1">
                 <a href="/User/ForgetPassword">I forgot my password</a>
             </p>
             @*<p class="mb-0">
-                <a href="register.html" class="text-center">Register a new membership</a>
-            </p>*@
+                    <a href="register.html" class="text-center">Register a new membership</a>
+                </p>*@
         </div>
         <!-- /.login-card-body -->
     </div>
 </div>
 @section Scripts {
-  
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
 }
