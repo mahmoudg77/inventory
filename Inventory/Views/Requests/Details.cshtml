@@ -1,0 +1,82 @@
+﻿@model Inventory.Models.Request
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Request</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Created_By)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Created_By)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Updated_By)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Updated_By)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Created_At)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Created_At)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Updated_At)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Updated_At)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Priority)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Priority)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Asset.Ser_Num)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Asset.Ser_Num)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Transaction.Created_By)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Transaction.Created_By)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User.F_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.F_Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Req_Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

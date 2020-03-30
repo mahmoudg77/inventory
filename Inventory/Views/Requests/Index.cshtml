@@ -1,0 +1,75 @@
+﻿@model IEnumerable<Inventory.Models.Request>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Created_By)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Updated_By)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Created_At)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Updated_At)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Priority)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Asset.Ser_Num)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Transaction.Created_By)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.User.F_Name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Created_By)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Updated_By)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Created_At)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Updated_At)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Priority)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Asset.Ser_Num)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Transaction.Created_By)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.User.F_Name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Req_Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Req_Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Req_Id })
+        </td>
+    </tr>
+}
+
+</table>

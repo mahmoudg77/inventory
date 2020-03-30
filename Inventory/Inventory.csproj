@@ -179,6 +179,7 @@
     <Compile Include="Controllers\AssetsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NotAuthorizedController.cs" />
+    <Compile Include="Controllers\RequestsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Filters\GRecaptcha.cs" />
     <Compile Include="Filters\LoginFilter.cs" />
@@ -1982,6 +1983,11 @@
     <Content Include="Views\Users\Login.cshtml" />
     <Content Include="Views\Shared\_LayoutEmpty.cshtml" />
     <Content Include="Views\NotAuthorized\Index.cshtml" />
+    <Content Include="Views\Requests\Create.cshtml" />
+    <Content Include="Views\Requests\Delete.cshtml" />
+    <Content Include="Views\Requests\Details.cshtml" />
+    <Content Include="Views\Requests\Edit.cshtml" />
+    <Content Include="Views\Requests\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
