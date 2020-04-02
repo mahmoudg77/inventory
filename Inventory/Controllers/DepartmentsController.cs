@@ -10,129 +10,116 @@ using Inventory.Models;
 
 namespace Inventory.Controllers
 {
-    public class RequestsController : Controller
+    public class DepartmentsController : Controller
     {
         private InventoryEntities db = new InventoryEntities();
 
-        // GET: Requests
+        // GET: Departments
         public ActionResult Index()
         {
-            var requests = db.Requests.Include(r => r.Asset).Include(r => r.Transaction).Include(r => r.User);
-            return View(requests.ToList());
+            return View();
         }
 
         public ActionResult GetData()
         {
             using (InventoryEntities db = new InventoryEntities())
             {
-                List<Request> ReqList = db.Requests.ToList<Request>();
-                return Json(new { data = ReqList }, JsonRequestBehavior.AllowGet);
+                List<Department> dptList = db.Departments.ToList<Department>();
+                return Json(new { data = dptList }, JsonRequestBehavior.AllowGet);
             }
         }
 
-        // GET: Requests/Details/5
+        // GET: Departments/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Request request = db.Requests.Find(id);
-            if (request == null)
+            Department department = db.Departments.Find(id);
+            if (department == null)
             {
                 return HttpNotFound();
             }
-            return View(request);
+            return View(department);
         }
 
-        // GET: Requests/Create
+        // GET: Departments/Create
         public ActionResult Create()
         {
-            ViewBag.Ast_Id = new SelectList(db.Assets, "Ast_Id", "Ser_Num");
-            ViewBag.Tra_Id = new SelectList(db.Transactions, "Tra_Id", "Created_By");
-            ViewBag.Usr_Id = new SelectList(db.Users, "Usr_Id", "F_Name");
             return View();
         }
 
-        // POST: Requests/Create
+        // POST: Departments/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Req_Id,Usr_Id,Ast_Id,Tra_Id,Created_By,Updated_By,Created_At,Updated_At,Priority")] Request request)
+        public ActionResult Create([Bind(Include = "Dep_Id,Dep_Nam,Created_By,Updated_By,Created_At,Updated_At,Priority")] Department department)
         {
             if (ModelState.IsValid)
             {
-                db.Requests.Add(request);
+                db.Departments.Add(department);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Ast_Id = new SelectList(db.Assets, "Ast_Id", "Ser_Num", request.Ast_Id);
-            ViewBag.Tra_Id = new SelectList(db.Transactions, "Tra_Id", "Created_By", request.Tra_Id);
-            ViewBag.Usr_Id = new SelectList(db.Users, "Usr_Id", "F_Name", request.Usr_Id);
-            return View(request);
+            return View(department);
         }
 
-        // GET: Requests/Edit/5
+        // GET: Departments/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Request request = db.Requests.Find(id);
-            if (request == null)
+            Department department = db.Departments.Find(id);
+            if (department == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.Ast_Id = new SelectList(db.Assets, "Ast_Id", "Ser_Num", request.Ast_Id);
-            ViewBag.Tra_Id = new SelectList(db.Transactions, "Tra_Id", "Created_By", request.Tra_Id);
-            ViewBag.Usr_Id = new SelectList(db.Users, "Usr_Id", "F_Name", request.Usr_Id);
-            return View(request);
+            return View(department);
         }
 
-        // POST: Requests/Edit/5
+        // POST: Departments/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Req_Id,Usr_Id,Ast_Id,Tra_Id,Created_By,Updated_By,Created_At,Updated_At,Priority")] Request request)
+        public ActionResult Edit([Bind(Include = "Dep_Id,Dep_Nam,Created_By,Updated_By,Created_At,Updated_At,Priority")] Department department)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(request).State = EntityState.Modified;
+                db.Entry(department).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.Ast_Id = new SelectList(db.Assets, "Ast_Id", "Ser_Num", request.Ast_Id);
-            ViewBag.Tra_Id = new SelectList(db.Transactions, "Tra_Id", "Created_By", request.Tra_Id);
-            ViewBag.Usr_Id = new SelectList(db.Users, "Usr_Id", "F_Name", request.Usr_Id);
-            return View(request);
+            return View(department);
         }
 
-        // GET: Requests/Delete/5
+        // GET: Departments/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Request request = db.Requests.Find(id);
-            if (request == null)
+            Department department = db.Departments.Find(id);
+            if (department == null)
             {
                 return HttpNotFound();
             }
-            return View(request);
+            return View(department);
         }
 
-        // POST: Requests/Delete/5
+        // POST: Departments/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Request request = db.Requests.Find(id);
-            db.Requests.Remove(request);
+            Department department = db.Departments.Find(id);
+            db.Departments.Remove(department);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

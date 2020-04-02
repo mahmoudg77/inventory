@@ -23,6 +23,16 @@ namespace Inventory.Controllers
             return View(users.ToList());
         }
 
+        public ActionResult GetData()
+        {
+            using (InventoryEntities db = new InventoryEntities())
+            {
+                List<User> usrList = db.Users.ToList<User>();
+                return Json(new { data = usrList }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+
         // GET: Users/Details/5
         [RoleFilter(new int[] { 1 })]
         public ActionResult Details(int? id)

@@ -4,101 +4,132 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Delete</h2>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>User</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Usr_Type)
-        </dt>
+<title>Delete User</title>
 
-        <dd>
-            @Html.DisplayFor(model => model.Usr_Type)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.F_Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.F_Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.L_Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.L_Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Pho_Num)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Pho_Num)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Created_By)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Created_By)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Updated_By)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Updated_By)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Created_At)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Created_At)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Updated_At)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Updated_At)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Status)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Department.Dep_Nam)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Department.Dep_Nam)
-        </dd>
-
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
-        </div>
+<style type="text/css">
+    dt {
+        padding-left: 5px;
     }
-</div>
+
+    dd {
+        padding-left: 5px;
+        background-color: #FFFFFF;
+    }
+</style>
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h2>Delete User</h2>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<section class="content">
+    <div class="card bg-light mb-3">
+        <div class="card-body">
+            <div>
+                <h3>Are you sure you want to delete this User ?</h3>
+                <dl>
+
+                    <dt>
+                        @Html.DisplayName("User Type :")
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Usr_Type)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayName("First Name :")
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.F_Name)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayName("Last Name :")
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.L_Name)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayName("Phone Number :")
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Pho_Num)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayName("Created By :")
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Created_By)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayName("Updated By :")
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Updated_By)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayName("Created At :")
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Created_At)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayName("Updated At :")
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Updated_At)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayName("Status :")
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Status)
+                    </dd>
+
+                    @*<dt>
+                        @Html.DisplayName("Department Department Name :")
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Department.Dep_Nam)
+                    </dd>*@
+
+                </dl>
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-actions  col-md-offset-2 col-md-10">
+                        <input type="submit" value="Delete User" class='btn btn-danger btn-sm' />
+
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</section>

@@ -3,6 +3,9 @@
 @{
     ViewBag.Title = "Details";
 }
+
+<title>Asset Details</title>
+
 <style type="text/css">
     dt {
         padding-left: 5px;
@@ -10,17 +13,29 @@
 
     dd {
         padding-left: 5px;
-        background-color: #f5f6fa;
+        background-color: #FFFFFF;
     }
 </style>
-<section class="content">
-    <h2>Asset Details</h2>
-    <div class="card bg-white mb-3">
-        <div>
 
-            <dl class="dl-horizontal">
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h2>Asset Details</h2>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+
+<section class="content">
+    <div class="card bg-light mb-3">
+        <div class="card-body">
+
+            <dl class="dl-horizontal" padding-left: 5px;>
+
                 <dt>
-                    @Html.DisplayName("Serial Number")
+                    @Html.DisplayName("Serial Number :")
                 </dt>
 
                 <dd>
@@ -28,7 +43,7 @@
                 </dd>
 
                 <dt>
-                    @Html.DisplayName("Model Number")
+                    @Html.DisplayName("Model Number :")
                 </dt>
 
                 <dd>
@@ -36,7 +51,7 @@
                 </dd>
 
                 <dt>
-                    @Html.DisplayName("Asset Type")
+                    @Html.DisplayName("Asset Type :")
                 </dt>
 
                 <dd>
@@ -44,7 +59,7 @@
                 </dd>
 
                 <dt>
-                    @Html.DisplayName("Cost")
+                    @Html.DisplayName("Cost :")
                 </dt>
 
                 <dd>
@@ -52,7 +67,7 @@
                 </dd>
 
                 <dt>
-                    @Html.DisplayName("Date")
+                    @Html.DisplayName("Date :")
                 </dt>
 
                 <dd>
@@ -60,7 +75,7 @@
                 </dd>
 
                 <dt>
-                    @Html.DisplayName("Created By")
+                    @Html.DisplayName("Created By :")
                 </dt>
 
                 <dd>
@@ -68,7 +83,7 @@
                 </dd>
 
                 <dt>
-                    @Html.DisplayName("Updated By")
+                    @Html.DisplayName("Updated By :")
                 </dt>
 
                 <dd>
@@ -76,7 +91,7 @@
                 </dd>
 
                 <dt>
-                    @Html.DisplayName("Created At")
+                    @Html.DisplayName("Created At :")
                 </dt>
 
                 <dd>
@@ -84,7 +99,7 @@
                 </dd>
 
                 <dt>
-                    @Html.DisplayName("Updated At")
+                    @Html.DisplayName("Updated At :")
                 </dt>
 
                 <dd>
@@ -92,7 +107,7 @@
                 </dd>
 
                 <dt>
-                    @Html.DisplayName("Is Active")
+                    @Html.DisplayName("Is Active :")
                 </dt>
 
                 <dd>

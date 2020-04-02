@@ -1,10 +1,10 @@
-﻿@model IEnumerable<Inventory.Models.Asset>
+﻿@model IEnumerable<Inventory.Models.Department>
 
 @{
     ViewBag.Title = "Index";
 }
 
-<title>Assets Table</title>
+<title>Departments Table</title>
 
 <!-- Tell the browser to be responsive to screen width -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,12 +21,12 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h2>Assets Table</h2>
+                <h2>Departments Table</h2>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Assets</li>
+                    <li class="breadcrumb-item active">Departments</li>
                 </ol>
             </div>
         </div>
@@ -46,17 +46,12 @@
                     <table id="example1" class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                @*<th>Asset Id</th>*@
-                                <th>Serial Number</th>
-                                <th>Model Number</th>
-                                <th>Asset Type</th>
-                                <th>Cost</th>
-                                @*<th>Date</th>*@
+                                <th>Department Name</th>
                                 <th>Created By</th>
                                 <th>Updated By</th>
-                                @*<th>Created At</th>
-                                    <th>Updated At</th>
-                                    <th>Is Active</th>*@
+                                <th>Created At</th>
+                                <th>Updated At</th>
+                                <th>Priority</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -91,24 +86,19 @@
                 "autoWidth": true,
 
                 "ajax": {
-                    "url": "/Assets/GetData",
+                    "url": "/Departments/GetData",
                     "type": "GET",
                     "datatype": "json"
                 },
                 "columns": [
-                    //{ "data": "Ast_Id", },
-                    { "data": "Ser_Num","width":"auto" },
-                    { "data": "Mod_Num","width":"auto" },
-                    { "data": "Ast_Type","width":"auto" },
-                    { "data": "Cost","width":"auto" },
-                    //{ "data": "Date" },
+                    { "data": "Dep_Nam","width":"auto" },
                     { "data": "Created_By","width":"auto" },
                     { "data": "Updated_By","width":"auto" },
-                    //{ "data": "Created_At" },
-                    //{ "data": "Updated_At" },
-                    //{ "data": "Is_Active" }
-                    { "data": "Ast_Id", "render": function (data, type, full, meta) {
-                         return '<a class="btn btn-success btn-sm fa fa-pencil" href="@Url.Action("Edit","Assets")?id=' + data + '" class="editAsset"> Edit</a> | <a class="btn btn-secondary btn-sm fa fa-info" href="@Url.Action("Details","Assets")?id=' + data + '" class="detailsAsset"> Details</a> | <a class="btn btn-danger btn-sm fa fa-trash" href="@Url.Action("Delete","Assets")?id=' + data + '" class="deleteAsset"> Delete</a>';
+                    { "data": "Created_At","width":"auto" },
+                    { "data": "Updated_At","width":"auto" },
+                    { "data": "Priority","width":"auto" },
+                    { "data": "Dep_Id", "render": function (data, type, full, meta) {
+                         return '<a class="btn btn-success btn-sm fa fa-pencil" href="@Url.Action("Edit","Departments")?id=' + data + '" class="editDepartment"> Edit</a> | <a class="btn btn-secondary btn-sm fa fa-info" href="@Url.Action("Details","Departments")?id=' + data + '" class="detailsDepartment"> Details</a> | <a class="btn btn-danger btn-sm fa fa-trash" href="@Url.Action("Delete","Departments")?id=' + data + '" class="deleteDepartment"> Delete</a>';
                     },
                         "orderable": false,
                         "searchable":false,

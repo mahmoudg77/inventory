@@ -24,8 +24,8 @@ namespace Inventory.Models
         public System.DateTime Updated_At { get; set; }
         public string Priority { get; set; }
     
-        public virtual Asset Asset { get; set; }
-        public virtual Transaction Transaction { get; set; }
-        public virtual User User { get; set; }
+        public  Asset Asset { get; set; }
+        public  Transaction Transaction { get; set; }
+        public  User User { get; set; }
     }
 }

@@ -1,10 +1,10 @@
-﻿@model Inventory.Models.Asset
+﻿@model Inventory.Models.Department
 
 @{
     ViewBag.Title = "Delete";
 }
 
-<title>Delete Asset</title>
+<title>Delete Department</title>
 
 <style type="text/css">
     dt {
@@ -21,7 +21,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h2>Delete Asset</h2>
+                <h2>Delete Department</h2>
             </div>
         </div>
     </div><!-- /.container-fluid -->
@@ -31,47 +31,15 @@
     <div class="card bg-light mb-3">
         <div class="card-body">
             <div>
-                <h3>Are you sure you want to delete this Asset ?</h3>
+                <h3>Are you sure you want to delete this Department ?</h3>
                 <dl>
 
                     <dt>
-                        @Html.DisplayName("Serial Number :")
+                        @Html.DisplayName("Department Name :")
                     </dt>
 
                     <dd>
-                        @Html.DisplayFor(model => model.Ser_Num)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayName("Model Number :")
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.Mod_Num)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayName("Asset Type :")
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.Ast_Type)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayName("Cost :")
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.Cost)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayName("Date :")
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.Date)
+                        @Html.DisplayFor(model => model.Dep_Nam)
                     </dd>
 
                     <dt>
@@ -107,11 +75,11 @@
                     </dd>
 
                     <dt>
-                        @Html.DisplayName("Is Active :")
+                        @Html.DisplayName("Priority :")
                     </dt>
 
                     <dd>
-                        @Html.DisplayFor(model => model.Is_Active)
+                        @Html.DisplayFor(model => model.Priority)
                     </dd>
 
                 </dl>
@@ -121,7 +89,7 @@
                     @Html.AntiForgeryToken()
 
                     <div class="form-actions  col-md-offset-2 col-md-10">
-                        <input type="submit" value="Delete Asset" class='btn btn-danger btn-sm' />
+                        <input type="submit" value="Delete Department" class='btn btn-danger btn-sm' />
 
                     </div>
                 }

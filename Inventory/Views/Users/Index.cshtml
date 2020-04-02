@@ -4,84 +4,119 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Usr_Type)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.F_Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.L_Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Pho_Num)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Created_By)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Updated_By)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Created_At)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Updated_At)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Status)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Department.Dep_Nam)
-        </th>
-        <th></th>
-    </tr>
+<title>Users Table</title>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Usr_Type)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.F_Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.L_Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Pho_Num)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Created_By)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Updated_By)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Created_At)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Updated_At)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Status)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Department.Dep_Nam)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Usr_Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Usr_Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Usr_Id })
-        </td>
-    </tr>
+<!-- Tell the browser to be responsive to screen width -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Ionicons -->
+<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+<!-- Google Font: Source Sans Pro -->
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h2>Users Table</h2>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Users</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    @Html.ActionLink(" Create New", "Create", null, new { @class = "btn btn-info fa fa-plus" })
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <table id="example1" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>User Type</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Phone Number</th>
+                                <th>Created By</th>
+                                <th>Updated By</th>
+                                <th>Created At</th>
+                                <th>Updated At</th>
+                                <th>Status</th>
+                                @*<th>Department Department Name</th>*@
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+<!-- /.content -->
+@Styles.Render("~/Content/styles")
+@Scripts.Render("~/Content/scripts")
+
+<!--font-awesome -->
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+@section scripts{
+
+    <script>
+        $(document).ready(function () {
+            $('#example1').dataTable({
+
+                "paging": true,
+                "lengthChange": true,
+                "searching": true,
+                "ordering": true,
+                "autoWidth": true,
+
+                "ajax": {
+                    "url": "/Users/GetData",
+                    "type": "GET",
+                    "datatype": "json"
+                },
+                "columns": [
+                    { "data": "Usr_Type", },
+                    { "data": "F_Name","width":"auto" },
+                    { "data": "L_Name","width":"auto" },
+                    { "data": "Pho_Num","width":"auto" },
+                    { "data": "Created_By","width":"auto" },
+                    { "data": "Updated_By","width":"auto" },
+                    { "data": "Created_At" },
+                    { "data": "Updated_At" },
+                    { "data": "Status" },
+                    //{ "data": "Department.Dep_Nam" },
+                    { "data": "Usr_Id", "render": function (data, type, full, meta) {
+                         return '<a class="btn btn-success btn-sm fa fa-pencil" href="@Url.Action("Edit","Users")?id=' + data + '" class="editUser"> Edit</a> | <a class="btn btn-secondary btn-sm fa fa-info" href="@Url.Action("Details","Users")?id=' + data + '" class="detailsUser"> Details</a> | <a class="btn btn-danger btn-sm fa fa-trash" href="@Url.Action("Delete","Users")?id=' + data + '" class="deleteUser"> Delete</a>';
+                    },
+                        "orderable": false,
+                        "searchable":false,
+                        "width":"250px"
+                    }
+                ]
+            });
+        });
+
+    </script>
+
+
 }
-
-</table>
