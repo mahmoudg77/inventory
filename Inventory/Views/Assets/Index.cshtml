@@ -4,133 +4,120 @@
     ViewBag.Title = "Index";
 }
 
+<title>Assets Table</title>
+
+<!-- Tell the browser to be responsive to screen width -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Ionicons -->
+<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+<!-- Google Font: Source Sans Pro -->
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h2>Assets Table</h2>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Assets</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
 <!-- Main content -->
 <section class="content">
-    <h2>Index</h2>
     <div class="row">
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <div class="row justify-content-between">
-                        <div class="col-3">
-                            <p>
-                                @Html.ActionLink("Create New", "Create")
-                            </p>
-                        </div>
-                        <div class="col-3">
-                            <b> Search:</b>
-                            <input type="text" id="search" placeholder="Search Input..">
-                        </div>
-                    </div>
+                    @Html.ActionLink(" Create New", "Create", null, new { @class = "btn btn-info fa fa-plus" })
                 </div>
-
                 <!-- /.card-header -->
                 <div class="card-body">
                     <table id="example1" class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th>
-                                    @Html.ActionLink("Serial Number", "Index", new { sortOrder = ViewBag.Ser_NumSortParm }, new { Style = "color:Black" })
-                                </th>
-                                <th>
-                                    @Html.ActionLink("Model Number", "Index", new { sortOrder = ViewBag.Mod_NumSortParm }, new { Style = "color:Black" })
-                                </th>
-                                <th>
-                                    @Html.ActionLink("Asset Type", "Index", new { sortOrder = ViewBag.Ast_TypeSortParm }, new { Style = "color:Black" })
-                                </th>
-                                <th>
-                                    @Html.ActionLink("Cost", "Index", new { sortOrder = ViewBag.CostSortParm }, new { Style = "color:Black" })
-                                </th>
-                                @*<th>
-                                    @Html.ActionLink("Date", "Index", new { sortOrder = ViewBag.DateSortParm }, new { Style = "color:Black" })
-                                </th>*@
-                                <th>
-                                    @Html.ActionLink("Created By", "Index", new { sortOrder = ViewBag.Created_BySortParm }, new { Style = "color:Black" })
-                                </th>
-                                <th>
-                                    @Html.ActionLink("Updated By", "Index", new { sortOrder = ViewBag.Updated_BySortParm }, new { Style = "color:Black" })
-                                </th>
-                                @*<th>
-                                    @Html.ActionLink("Created At", "Index", new { sortOrder = ViewBag.Created_AtSortParm }, new { Style = "color:Black" })
-                                </th>
-                                <th>
-                                    @Html.ActionLink("Updated At", "Index", new { sortOrder = ViewBag.Updated_AtSortParm }, new { Style = "color:Black" })
-                                </th>
-                                <th>
-                                    @Html.ActionLink("Is Active", "Index", new { sortOrder = ViewBag.Is_ActiveSortParm }, new { Style = "color:Black" })
-                                </th>*@
-                                <th>
-                                    Actions
-                                </th>
+                                @*<th>Asset Id</th>*@
+                                <th>Serial Number</th>
+                                <th>Model Number</th>
+                                <th>Asset Type</th>
+                                <th>Cost</th>
+                                @*<th>Date</th>*@
+                                <th>Created By</th>
+                                <th>Updated By</th>
+                                @*<th>Created At</th>
+                                    <th>Updated At</th>
+                                    <th>Is Active</th>*@
+                                <th>Actions</th>
                             </tr>
                         </thead>
-                        <tbody id="searchin">
-
-                            @foreach (var item in Model)
-                            {
-                                <tr>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Ser_Num)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Mod_Num)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Ast_Type)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Cost)
-                                    </td>
-                                    @*<td>
-                                        @Html.DisplayFor(modelItem => item.Date)
-                                    </td>*@
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Created_By)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Updated_By)
-                                    </td>
-                                    @*<td>
-                                        @Html.DisplayFor(modelItem => item.Created_At)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Updated_At)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Is_Active)
-                                    </td>*@
-                                    <td>
-                                        @Html.ActionLink("Edit", "Edit", new { id = item.Ast_Id }) |
-                                        @Html.ActionLink("Details", "Details", new { id = item.Ast_Id }) |
-                                        @Html.ActionLink("Delete", "Delete", new { id = item.Ast_Id })
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
-
                     </table>
                 </div>
                 <!-- /.card-body -->
             </div>
             <!-- /.card -->
         </div>
+        <!-- /.col -->
     </div>
-    <!-- /.col -->
     <!-- /.row -->
 </section>
-<!-- /.Main content -->
-
+<!-- /.content -->
+@Styles.Render("~/Content/styles")
 @Scripts.Render("~/Content/scripts")
 
+<!--font-awesome -->
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 
-<!-- search scripts -->
+@section scripts{
 
-<script>
-        $("#search").on("keyup", function () {
-            var value = $(this).val().toLowerCase();
-            $("#searchin tr").filter(function () {
-            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+
+    <script>
+        $(document).ready(function () {
+            $('#example1').dataTable({
+
+                "paging": true,
+                "lengthChange": true,
+                "searching": true,
+                "ordering": true,
+                "autoWidth": true,
+
+                "ajax": {
+                    "url": "/Assets/GetData",
+                    "type": "GET",
+                    "datatype": "json"
+                },
+                "columns": [
+                    //{ "data": "Ast_Id", },
+                    { "data": "Ser_Num","width":"auto" },
+                    { "data": "Mod_Num","width":"auto" },
+                    { "data": "Ast_Type","width":"auto" },
+                    { "data": "Cost","width":"auto" },
+                    //{ "data": "Date" },
+                    { "data": "Created_By","width":"auto" },
+                    { "data": "Updated_By","width":"auto" },
+                    //{ "data": "Created_At" },
+                    //{ "data": "Updated_At" },
+                    //{ "data": "Is_Active" }
+                    { "data": "Ast_Id", "render": function (data, type, full, meta) {
+                         return '<a class="btn btn-success btn-sm fa fa-pencil" href="@Url.Action("Edit","Assets")?id=' + data + '" class="editAsset"> Edit</a> | <a class="btn btn-secondary btn-sm fa fa-info" href="@Url.Action("Details","Assets")?id=' + data + '" class="detailsAsset"> Details</a> | <a class="btn btn-danger btn-sm fa fa-trash" href="@Url.Action("Delete","Assets")?id=' + data + '" class="deleteAsset"> Delete</a>';
+                    },
+                        "orderable": false,
+                        "searchable":false,
+                        "width":"250px"
+                    }
+                ]
+            });
         });
-    });
-</script>
-<!-- /.search scripts -->
+    </script>
+
+
+}
