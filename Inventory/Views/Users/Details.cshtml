@@ -4,95 +4,123 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
 
-<div>
-    <h4>User</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Usr_Type)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Usr_Type)
-        </dd>
+<title>User Details</title>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.F_Name)
-        </dt>
+<style type="text/css">
+    dt {
+        padding-left: 5px;
+    }
 
-        <dd>
-            @Html.DisplayFor(model => model.F_Name)
-        </dd>
+    dd {
+        padding-left: 5px;
+        background-color: #FFFFFF;
+    }
+</style>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.L_Name)
-        </dt>
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h2>User Details</h2>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
 
-        <dd>
-            @Html.DisplayFor(model => model.L_Name)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Pho_Num)
-        </dt>
+<section class="content">
+    <div class="card bg-light mb-3">
+        <div class="card-body">
 
-        <dd>
-            @Html.DisplayFor(model => model.Pho_Num)
-        </dd>
+            <dl class="dl-horizontal" padding-left: 5px;>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Created_By)
-        </dt>
+                <dt>
+                    @Html.DisplayName("User Type :")
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Created_By)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Usr_Type)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Updated_By)
-        </dt>
+                <dt>
+                    @Html.DisplayName("First Name :")
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Updated_By)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.F_Name)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Created_At)
-        </dt>
+                <dt>
+                    @Html.DisplayName("Last Name :")
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Created_At)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.L_Name)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Updated_At)
-        </dt>
+                <dt>
+                    @Html.DisplayName("Phone Number :")
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Updated_At)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Pho_Num)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
+                <dt>
+                    @Html.DisplayName("Created By :")
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Status)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Created_By)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Department.Dep_Nam)
-        </dt>
+                <dt>
+                    @Html.DisplayName("Updated By :")
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Department.Dep_Nam)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Updated_By)
+                </dd>
 
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Usr_Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+                <dt>
+                    @Html.DisplayName("Created At :")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Created_At)
+                </dd>
+
+                <dt>
+                    @Html.DisplayName("Updated At :")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Updated_At)
+                </dd>
+
+                <dt>
+                    @Html.DisplayName("Status :")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Status)
+                </dd>
+
+                @*<dt>
+                    @Html.DisplayName("Department Department Name :")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Department.Dep_Nam)
+                </dd>*@
+
+            </dl>
+        </div>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Usr_Id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</section>

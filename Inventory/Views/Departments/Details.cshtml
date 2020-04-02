@@ -1,11 +1,10 @@
-﻿@model Inventory.Models.Request
+﻿@model Inventory.Models.Department
 
 @{
     ViewBag.Title = "Details";
 }
 
-
-    <title>Request Details</title>
+<title>Department Details</title>
 
 <style type="text/css">
     dt {
@@ -22,7 +21,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h2>Request Details</h2>
+                <h2>Department Details</h2>
             </div>
         </div>
     </div><!-- /.container-fluid -->
@@ -34,6 +33,14 @@
         <div class="card-body">
 
             <dl class="dl-horizontal" padding-left: 5px;>
+
+                <dt>
+                    @Html.DisplayName("Department Name :")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Dep_Nam)
+                </dd>
 
                 <dt>
                     @Html.DisplayName("Created By :")
@@ -75,35 +82,11 @@
                     @Html.DisplayFor(model => model.Priority)
                 </dd>
 
-                @*<dt>
-                    @Html.DisplayName("Asset Serial Number :")
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.Asset.Ser_Num)
-                </dd>
-
-                <dt>
-                    @Html.DisplayName("Transaction Created By :")
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.Transaction.Created_By)
-                </dd>
-
-                <dt>
-                    @Html.DisplayName("First Name :")
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.User.F_Name)
-                </dd>*@
-
             </dl>
         </div>
     </div>
     <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Req_Id }) |
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Dep_Id }) |
         @Html.ActionLink("Back to List", "Index")
     </p>
 </section>
