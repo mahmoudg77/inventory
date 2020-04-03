@@ -17,15 +17,14 @@ namespace Inventory.Models
         public int Req_Id { get; set; }
         public int Usr_Id { get; set; }
         public int Ast_Id { get; set; }
-        public int Tra_Id { get; set; }
+        public int Req_Status { get; set; }
         public string Created_By { get; set; }
         public string Updated_By { get; set; }
         public System.DateTime Created_At { get; set; }
         public System.DateTime Updated_At { get; set; }
         public string Priority { get; set; }
     
-        public  Asset Asset { get; set; }
-        public  Transaction Transaction { get; set; }
-        public  User User { get; set; }
+        public virtual Asset Asset { get; set; }
+        public virtual User User { get; set; }
     }
 }

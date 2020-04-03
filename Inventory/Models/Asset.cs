@@ -11,8 +11,7 @@ namespace Inventory.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Asset
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,15 +19,11 @@ namespace Inventory.Models
         {
             this.Requests = new HashSet<Request>();
         }
-
+    
         public int Ast_Id { get; set; }
-        [Required(ErrorMessage = "Serial Number field is required")]
         public string Ser_Num { get; set; }
-        [Required(ErrorMessage = "Model Number field is required")]
         public string Mod_Num { get; set; }
-        [Required(ErrorMessage = "Asset Type field is required")]
         public string Ast_Type { get; set; }
-        [Required(ErrorMessage = "Cost field is required")]
         public Nullable<int> Cost { get; set; }
         public System.DateTime Date { get; set; }
         public string Created_By { get; set; }
@@ -36,8 +31,8 @@ namespace Inventory.Models
         public System.DateTime Created_At { get; set; }
         public System.DateTime Updated_At { get; set; }
         public bool Is_Active { get; set; }
-
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public  ICollection<Request> Requests { get; set; }
+        public virtual ICollection<Request> Requests { get; set; }
     }
 }

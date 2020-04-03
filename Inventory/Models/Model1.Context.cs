@@ -27,8 +27,7 @@ namespace Inventory.Models
     
         public virtual DbSet<Asset> Assets { get; set; }
         public virtual DbSet<Department> Departments { get; set; }
-        public virtual DbSet<Request> Requests { get; set; }
-        public virtual DbSet<Transaction> Transactions { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Request> Requests { get; set; }
     }
 }

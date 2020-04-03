@@ -17,7 +17,7 @@ namespace Inventory.Controllers
         // GET: Requests
         public ActionResult Index()
         {
-            var requests = db.Requests.Include(r => r.Asset).Include(r => r.Transaction).Include(r => r.User);
+            var requests = db.Requests.Include(r => r.Asset).Include(r => r.User);
             return View(requests.ToList());
         }
 
@@ -25,7 +25,7 @@ namespace Inventory.Controllers
         {
             using (InventoryEntities db = new InventoryEntities())
             {
-                List<Request> ReqList = db.Requests.ToList<Request>();
+                List<Request> ReqList = db.Requests.Include(r=>r.Asset).Include(a=>a.User).ToList();
                 return Json(new { data = ReqList }, JsonRequestBehavior.AllowGet);
             }
         }
@@ -49,7 +49,6 @@ namespace Inventory.Controllers
         public ActionResult Create()
         {
             ViewBag.Ast_Id = new SelectList(db.Assets, "Ast_Id", "Ser_Num");
-            ViewBag.Tra_Id = new SelectList(db.Transactions, "Tra_Id", "Created_By");
             ViewBag.Usr_Id = new SelectList(db.Users, "Usr_Id", "F_Name");
             return View();
         }
@@ -69,7 +68,6 @@ namespace Inventory.Controllers
             }
 
             ViewBag.Ast_Id = new SelectList(db.Assets, "Ast_Id", "Ser_Num", request.Ast_Id);
-            ViewBag.Tra_Id = new SelectList(db.Transactions, "Tra_Id", "Created_By", request.Tra_Id);
             ViewBag.Usr_Id = new SelectList(db.Users, "Usr_Id", "F_Name", request.Usr_Id);
             return View(request);
         }
@@ -87,7 +85,6 @@ namespace Inventory.Controllers
                 return HttpNotFound();
             }
             ViewBag.Ast_Id = new SelectList(db.Assets, "Ast_Id", "Ser_Num", request.Ast_Id);
-            ViewBag.Tra_Id = new SelectList(db.Transactions, "Tra_Id", "Created_By", request.Tra_Id);
             ViewBag.Usr_Id = new SelectList(db.Users, "Usr_Id", "F_Name", request.Usr_Id);
             return View(request);
         }
@@ -106,7 +103,6 @@ namespace Inventory.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.Ast_Id = new SelectList(db.Assets, "Ast_Id", "Ser_Num", request.Ast_Id);
-            ViewBag.Tra_Id = new SelectList(db.Transactions, "Tra_Id", "Created_By", request.Tra_Id);
             ViewBag.Usr_Id = new SelectList(db.Users, "Usr_Id", "F_Name", request.Usr_Id);
             return View(request);
         }

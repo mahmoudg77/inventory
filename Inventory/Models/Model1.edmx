@@ -40,22 +40,12 @@
           <Property Name="Req_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Usr_Id" Type="int" Nullable="false" />
           <Property Name="Ast_Id" Type="int" Nullable="false" />
-          <Property Name="Tra_Id" Type="int" Nullable="false" />
+          <Property Name="Req_Status" Type="int" Nullable="false" />
           <Property Name="Created_By" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Updated_By" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Created_At" Type="datetime" Nullable="false" />
           <Property Name="Updated_At" Type="datetime" Nullable="false" />
           <Property Name="Priority" Type="nvarchar" MaxLength="100" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Transactions">
-          <Key>
-            <PropertyRef Name="Tra_Id" />
-          </Key>
-          <Property Name="Tra_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Created_By" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="Updated_By" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="Created_At" Type="datetime" Nullable="false" />
-          <Property Name="Updated_At" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -75,18 +65,6 @@
           <Property Name="Email" Type="nvarchar" MaxLength="150" Nullable="false" />
           <Property Name="Password" Type="nvarchar" MaxLength="150" Nullable="false" />
         </EntityType>
-        <Association Name="FK_Requests_Transactions">
-          <End Role="Transactions" Type="Self.Transactions" Multiplicity="1" />
-          <End Role="Requests" Type="Self.Requests" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Transactions">
-              <PropertyRef Name="Tra_Id" />
-            </Principal>
-            <Dependent Role="Requests">
-              <PropertyRef Name="Tra_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Requests_Users">
           <End Role="Assets" Type="Self.Assets" Multiplicity="1" />
           <End Role="Requests" Type="Self.Requests" Multiplicity="*" />
@@ -115,12 +93,7 @@
           <EntitySet Name="Assets" EntityType="Self.Assets" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Departments" EntityType="Self.Departments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Requests" EntityType="Self.Requests" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Transactions" EntityType="Self.Transactions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Requests_Transactions" Association="Self.FK_Requests_Transactions">
-            <End Role="Transactions" EntitySet="Transactions" />
-            <End Role="Requests" EntitySet="Requests" />
-          </AssociationSet>
           <AssociationSet Name="FK_Requests_Users" Association="Self.FK_Requests_Users">
             <End Role="Assets" EntitySet="Assets" />
             <End Role="Requests" EntitySet="Requests" />
@@ -149,7 +122,7 @@
           <Property Name="Created_At" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Updated_At" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Is_Active" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Requests" Relationship="Self.FK_Requests_Users" FromRole="Assets" ToRole="Requests" />
+          <NavigationProperty Name="Requests" Relationship="InventoryModel.FK_Requests_Users" FromRole="Asset" ToRole="Request" />
         </EntityType>
         <EntityType Name="Department">
           <Key>
@@ -163,34 +136,6 @@
           <Property Name="Updated_At" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Priority" Type="Int16" Nullable="false" />
           <NavigationProperty Name="Users" Relationship="Self.FK_Users_Departments" FromRole="Departments" ToRole="Users" />
-        </EntityType>
-        <EntityType Name="Request">
-          <Key>
-            <PropertyRef Name="Req_Id" />
-          </Key>
-          <Property Name="Req_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Usr_Id" Type="Int32" Nullable="false" />
-          <Property Name="Ast_Id" Type="Int32" Nullable="false" />
-          <Property Name="Tra_Id" Type="Int32" Nullable="false" />
-          <Property Name="Created_By" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Updated_By" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Created_At" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Updated_At" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Priority" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Asset" Relationship="Self.FK_Requests_Users" FromRole="Requests" ToRole="Assets" />
-          <NavigationProperty Name="Transaction" Relationship="Self.FK_Requests_Transactions" FromRole="Requests" ToRole="Transactions" />
-          <NavigationProperty Name="User" Relationship="Self.FK_Requests_Users1" FromRole="Requests" ToRole="Users" />
-        </EntityType>
-        <EntityType Name="Transaction">
-          <Key>
-            <PropertyRef Name="Tra_Id" />
-          </Key>
-          <Property Name="Tra_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Created_By" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Updated_By" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Created_At" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Updated_At" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Requests" Relationship="Self.FK_Requests_Transactions" FromRole="Transactions" ToRole="Requests" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -208,22 +153,10 @@
           <Property Name="Updated_At" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Status" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Department" Relationship="Self.FK_Users_Departments" FromRole="Users" ToRole="Departments" />
-          <NavigationProperty Name="Requests" Relationship="Self.FK_Requests_Users1" FromRole="Users" ToRole="Requests" />
           <Property Name="Email" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="Password" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Requests" Relationship="InventoryModel.FK_Requests_Users1" FromRole="User" ToRole="Request" />
         </EntityType>
-        <Association Name="FK_Requests_Users">
-          <End Role="Assets" Type="Self.Asset" Multiplicity="1" />
-          <End Role="Requests" Type="Self.Request" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Assets">
-              <PropertyRef Name="Ast_Id" />
-            </Principal>
-            <Dependent Role="Requests">
-              <PropertyRef Name="Ast_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Users_Departments">
           <End Role="Departments" Type="Self.Department" Multiplicity="1" />
           <End Role="Users" Type="Self.User" Multiplicity="*" />
@@ -236,53 +169,64 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Requests_Transactions">
-          <End Role="Transactions" Type="Self.Transaction" Multiplicity="1" />
-          <End Role="Requests" Type="Self.Request" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Transactions">
-              <PropertyRef Name="Tra_Id" />
-            </Principal>
-            <Dependent Role="Requests">
-              <PropertyRef Name="Tra_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Requests_Users1">
-          <End Role="Users" Type="Self.User" Multiplicity="1" />
-          <End Role="Requests" Type="Self.Request" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="Usr_Id" />
-            </Principal>
-            <Dependent Role="Requests">
-              <PropertyRef Name="Usr_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="InventoryEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Assets" EntityType="Self.Asset" />
           <EntitySet Name="Departments" EntityType="Self.Department" />
-          <EntitySet Name="Requests" EntityType="Self.Request" />
-          <EntitySet Name="Transactions" EntityType="Self.Transaction" />
           <EntitySet Name="Users" EntityType="Self.User" />
-          <AssociationSet Name="FK_Requests_Users" Association="Self.FK_Requests_Users">
-            <End Role="Assets" EntitySet="Assets" />
-            <End Role="Requests" EntitySet="Requests" />
-          </AssociationSet>
           <AssociationSet Name="FK_Users_Departments" Association="Self.FK_Users_Departments">
             <End Role="Departments" EntitySet="Departments" />
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
-          <AssociationSet Name="FK_Requests_Transactions" Association="Self.FK_Requests_Transactions">
-            <End Role="Transactions" EntitySet="Transactions" />
-            <End Role="Requests" EntitySet="Requests" />
+          <EntitySet Name="Requests" EntityType="InventoryModel.Request" />
+          <AssociationSet Name="FK_Requests_Users" Association="InventoryModel.FK_Requests_Users">
+            <End Role="Asset" EntitySet="Assets" />
+            <End Role="Request" EntitySet="Requests" />
           </AssociationSet>
-          <AssociationSet Name="FK_Requests_Users1" Association="Self.FK_Requests_Users1">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="Requests" EntitySet="Requests" />
+          <AssociationSet Name="FK_Requests_Users1" Association="InventoryModel.FK_Requests_Users1">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Request" EntitySet="Requests" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Request">
+          <Key>
+            <PropertyRef Name="Req_Id" />
+          </Key>
+          <Property Name="Req_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Usr_Id" Type="Int32" Nullable="false" />
+          <Property Name="Ast_Id" Type="Int32" Nullable="false" />
+          <Property Name="Req_Status" Type="Int32" Nullable="false" />
+          <Property Name="Created_By" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Updated_By" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Created_At" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Updated_At" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Priority" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Asset" Relationship="InventoryModel.FK_Requests_Users" FromRole="Request" ToRole="Asset" />
+          <NavigationProperty Name="User" Relationship="InventoryModel.FK_Requests_Users1" FromRole="Request" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_Requests_Users">
+          <End Type="InventoryModel.Asset" Role="Asset" Multiplicity="1" />
+          <End Type="InventoryModel.Request" Role="Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Asset">
+              <PropertyRef Name="Ast_Id" />
+            </Principal>
+            <Dependent Role="Request">
+              <PropertyRef Name="Ast_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Requests_Users1">
+          <End Type="InventoryModel.User" Role="User" Multiplicity="1" />
+          <End Type="InventoryModel.Request" Role="Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Usr_Id" />
+            </Principal>
+            <Dependent Role="Request">
+              <PropertyRef Name="Usr_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -319,32 +263,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Requests">
-            <EntityTypeMapping TypeName="InventoryModel.Request">
-              <MappingFragment StoreEntitySet="Requests">
-                <ScalarProperty Name="Req_Id" ColumnName="Req_Id" />
-                <ScalarProperty Name="Usr_Id" ColumnName="Usr_Id" />
-                <ScalarProperty Name="Ast_Id" ColumnName="Ast_Id" />
-                <ScalarProperty Name="Tra_Id" ColumnName="Tra_Id" />
-                <ScalarProperty Name="Created_By" ColumnName="Created_By" />
-                <ScalarProperty Name="Updated_By" ColumnName="Updated_By" />
-                <ScalarProperty Name="Created_At" ColumnName="Created_At" />
-                <ScalarProperty Name="Updated_At" ColumnName="Updated_At" />
-                <ScalarProperty Name="Priority" ColumnName="Priority" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Transactions">
-            <EntityTypeMapping TypeName="InventoryModel.Transaction">
-              <MappingFragment StoreEntitySet="Transactions">
-                <ScalarProperty Name="Tra_Id" ColumnName="Tra_Id" />
-                <ScalarProperty Name="Created_By" ColumnName="Created_By" />
-                <ScalarProperty Name="Updated_By" ColumnName="Updated_By" />
-                <ScalarProperty Name="Created_At" ColumnName="Created_At" />
-                <ScalarProperty Name="Updated_At" ColumnName="Updated_At" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="InventoryModel.User">
               <MappingFragment StoreEntitySet="Users">
@@ -361,6 +279,21 @@
                 <ScalarProperty Name="Created_At" ColumnName="Created_At" />
                 <ScalarProperty Name="Updated_At" ColumnName="Updated_At" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Requests">
+            <EntityTypeMapping TypeName="InventoryModel.Request">
+              <MappingFragment StoreEntitySet="Requests">
+                <ScalarProperty Name="Priority" ColumnName="Priority" />
+                <ScalarProperty Name="Updated_At" ColumnName="Updated_At" />
+                <ScalarProperty Name="Created_At" ColumnName="Created_At" />
+                <ScalarProperty Name="Updated_By" ColumnName="Updated_By" />
+                <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+                <ScalarProperty Name="Req_Status" ColumnName="Req_Status" />
+                <ScalarProperty Name="Ast_Id" ColumnName="Ast_Id" />
+                <ScalarProperty Name="Usr_Id" ColumnName="Usr_Id" />
+                <ScalarProperty Name="Req_Id" ColumnName="Req_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
