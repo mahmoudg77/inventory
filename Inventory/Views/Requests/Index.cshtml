@@ -40,6 +40,9 @@
             <div class="card">
                 <div class="card-header">
                     @Html.ActionLink(" Create New", "Create", null, new { @class = "btn btn-info fa fa-plus" })
+                    @Html.ActionLink(" Waiting Requests", "Req_Suests", null, new { @class = "btn btn-info fa fa" })
+                    @Html.ActionLink(" Approved Requests", "Req_Suests", null, new { @class = "btn btn-info fa fa" })
+                    @Html.ActionLink(" Rejected Requests", "Req_Suests", null, new { @class = "btn btn-info fa fa" })
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
@@ -51,26 +54,28 @@
                                 <th>Created At</th>
                                 <th>Updated At</th>
                                 <th>Priority</th>
+                                <th>Status</th>
                                 @*<th>Serial Number</th>
-                <th>Transaction Created By</th>
-                <th>First Name</th>*@
+        <th>Transaction Created By</th>
+        <th>First Name</th>*@
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         @foreach(var itm in Model)
                         {
-                        <tr>
-                            <th>@itm.Created_By</th>
-                            <th>@itm.Updated_By</th>
-                            <th>@itm.Created_At</th>
-                            <th>@itm.Updated_At</th>
-                            <th>@itm.Priority</th>
-                            <th>
-                            <a class="btn btn-success btn-sm fa fa-pencil" href="@Url.Action("Edit","Requests",itm.Req_Id)" class="editRequest"> Edit</a> | 
-                            <a class="btn btn-secondary btn-sm fa fa-info" href="@Url.Action("Details","Requests",itm.Req_Id)" class="detailsRequest"> Details</a> | 
+                    <tr>
+                        <th>@itm.Created_By</th>
+                        <th>@itm.Updated_By</th>
+                        <th>@itm.Created_At</th>
+                        <th>@itm.Updated_At</th>
+                        <th>@itm.Priority</th>
+                        <th>@itm.Req_Status</th>
+                        <th>
+                            <a class="btn btn-success btn-sm fa fa-pencil" href="@Url.Action("Edit","Requests",itm.Req_Id)" class="editRequest"> Edit</a> |
+                            <a class="btn btn-secondary btn-sm fa fa-info" href="@Url.Action("Details","Requests",itm.Req_Id)" class="detailsRequest"> Details</a> |
                             <a class="btn btn-danger btn-sm fa fa-trash" href="@Url.Action("Delete","Requests",itm.Req_Id)" class="deleteRequest"> Delete</a>
-                            </th>
-                        </tr>
+                        </th>
+                    </tr>
                         }
                     </table>
                 </div>
@@ -112,6 +117,7 @@
                     { "data": "Updated_By","width":"auto" },
                     { "data": "Created_At","width":"auto" },
                     { "data": "Updated_At","width":"auto" },
+                    { "data": "Priority","width":"auto" },
                     { "data": "Priority","width":"auto" },
                     //{ "data": "Asset.Ser_Num","width":"auto" },
                     //{ "data": "Transaction.Created_By","width":"auto" },
