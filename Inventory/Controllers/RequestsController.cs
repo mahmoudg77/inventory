@@ -58,12 +58,13 @@ namespace Inventory.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Req_Id,Ast_Id,Tra_Id,Created_By,Updated_By,Created_At,Updated_At,Priority")] Request request)
+        public ActionResult Create([Bind(Include = "Req_Id,Ast_Id,Tra_Id,Created_By,Updated_By,Updated_At,Priority")] Request request)
         {
             if (ModelState.IsValid)
             {
                 db.Requests.Add(request);
                 request.Usr_Id = UserSession.User.Usr_Id;
+                request.Created_At = DateTime.Now;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
