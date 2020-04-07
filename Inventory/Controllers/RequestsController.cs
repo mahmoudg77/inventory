@@ -10,6 +10,7 @@ using Inventory.Models;
 
 namespace Inventory.Controllers
 {
+    [RoleFilter(new int[] { 3 })]
     public class RequestsController : Controller
     {
         private InventoryEntities db = new InventoryEntities();
@@ -49,7 +50,7 @@ namespace Inventory.Controllers
         public ActionResult Create()
         {
             ViewBag.Ast_Id = new SelectList(db.Assets, "Ast_Id", "Ser_Num");
-            ViewBag.Usr_Id = new SelectList(db.Users, "Usr_Id", "F_Name");
+            //ViewBag.Usr_Id = new SelectList(db.Users, "Usr_Id", "F_Name");
             return View();
         }
 
@@ -58,13 +59,16 @@ namespace Inventory.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Req_Id,Ast_Id,Tra_Id,Created_By,Updated_By,Updated_At,Priority")] Request request)
+        public ActionResult Create([Bind(Include = "Req_Id,Ast_Id,Tra_Id,Priority")] Request request)
         {
             if (ModelState.IsValid)
             {
                 db.Requests.Add(request);
                 request.Usr_Id = UserSession.User.Usr_Id;
+                request.Created_By = UserSession.User.F_Name + UserSession.User.L_Name;
                 request.Created_At = DateTime.Now;
+                request.Updated_At = DateTime.Now;
+                request.Updated_By = UserSession.User.F_Name + UserSession.User.L_Name;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
