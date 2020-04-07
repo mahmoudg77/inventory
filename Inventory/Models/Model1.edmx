@@ -169,7 +169,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="InventoryEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="InventoryEntities" annotation:LazyLoadingEnabled="false">
           <EntitySet Name="Assets" EntityType="Self.Asset" />
           <EntitySet Name="Departments" EntityType="Self.Department" />
           <EntitySet Name="Users" EntityType="Self.User" />

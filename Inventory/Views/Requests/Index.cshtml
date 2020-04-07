@@ -40,9 +40,12 @@
             <div class="card">
                 <div class="card-header">
                     @Html.ActionLink(" Create New", "Create", null, new { @class = "btn btn-info fa fa-plus" })
-                    @Html.ActionLink(" Waiting Requests", "Req_Suests", null, new { @class = "btn btn-info fa fa" })
-                    @Html.ActionLink(" Approved Requests", "Req_Suests", null, new { @class = "btn btn-info fa fa" })
-                    @Html.ActionLink(" Rejected Requests", "Req_Suests", null, new { @class = "btn btn-info fa fa" })
+                    <a href="~/Requests/Index?status=-1" class="btn btn-info fa fa-spiner">Waiting Requests</a>
+                    <a href="~/Requests/Index?status=1" class="btn btn-info fa fa-like-up">Approved Requests</a>
+                    <a href="~/Requests/Index?status=0" class="btn btn-info fa fa-like-down">Rejected Requests</a>
+                    @*@Html.ActionLink(" Waiting Requests", "Index",new { status=-1}, new { @class = "btn btn-info fa fa" })
+                    @Html.ActionLink(" Approved Requests", "Index", new { status = -1 }, new { @class = "btn btn-info fa fa" })
+                    @Html.ActionLink(" Rejected Requests", "Index", new { status = -1 }, new { @class = "btn btn-info fa fa" })*@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
@@ -64,17 +67,30 @@
                         @foreach(var itm in Model)
                         {
                     <tr>
-                        <th>@itm.Created_By</th>
-                        <th>@itm.Updated_By</th>
-                        <th>@itm.Created_At</th>
-                        <th>@itm.Updated_At</th>
-                        <th>@itm.Priority</th>
-                        <th>@itm.Req_Status</th>
+                        <td>@itm.Created_By</td>
+                        <td>@itm.Updated_By</td>
+                        <td>@itm.Created_At</td>
+                        <td>@itm.Updated_At</td>
+                        <td>@itm.Priority</td>
+                        @*<th>@itm.Req_Status</th>*@
+                    <td>
+                        @if (itm.Req_Status == -1)
+                        {
+                            <label class="badge badge-info">Waiting</label>
+                        }
+                        else if (itm.Req_Status == 0)
+                        {
+                            <label class="badge badge-danger">Rejected</label>
+                        }
+                        else
+                        {
+                            <label class="badge badge-success">Approved</label>
+                        }
+                    </td>
+
                         <th>
-                            <a class="btn btn-success btn-sm fa fa-pencil" href="@Url.Action("Edit","Requests",itm.Req_Id)" class="editRequest"> Edit</a> |
-                            <a class="btn btn-secondary btn-sm fa fa-info" href="@Url.Action("Details","Requests",itm.Req_Id)" class="detailsRequest"> Details</a> |
-                            <a class="btn btn-danger btn-sm fa fa-trash" href="@Url.Action("Delete","Requests",itm.Req_Id)" class="deleteRequest"> Delete</a>
-                        </th>
+                            <a class="btn btn-secondary btn-sm fa fa-info" href="@Url.Action("Details","Requests",new { ID = itm.Req_Id })" class="detailsRequest"> Details</a>
+ </th>
                     </tr>
                         }
                     </table>

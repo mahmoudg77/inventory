@@ -18,6 +18,7 @@ namespace Inventory.Models
         public InventoryEntities()
             : base("name=InventoryEntities")
         {
+            this.Configuration.LazyLoadingEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

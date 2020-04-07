@@ -101,9 +101,16 @@
 
             </dl>
         </div>
+
+        <div>
+            <a class="btn btn-success btn-sm fa fa-pencil" href="@Url.Action("Approve","Requests",new { ID = Model.Req_Id })" class="editRequest"> Approve</a> |
+
+            <a class="btn btn-danger btn-sm fa fa-trash" href="@Url.Action("Reject","Requests",new { ID = Model.Req_Id })" class="deleteRequest"> Reject</a>
+
+        </div>
     </div>
     <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Req_Id }) |
+
         @Html.ActionLink("Back to List", "Index")
     </p>
 </section>

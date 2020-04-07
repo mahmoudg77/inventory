@@ -16,12 +16,30 @@ namespace Inventory.Controllers
         private InventoryEntities db = new InventoryEntities();
 
         // GET: Requests
-        public ActionResult Index()
+        public ActionResult Index(int? status)
         {
-            var requests = db.Requests.Include(r => r.Asset).Include(r => r.User);
-            return View(requests.ToList());
-        }
+            if(status != null)
+            {
 
+            var requests = db.Requests.Include(r => r.Asset).Include(r => r.User).Where(a=>a.Req_Status==status);
+            return View(requests.ToList());
+            }
+            else
+            {
+            var requests = db.Requests.Include(r => r.Asset).Include(r => r.User);
+
+            return View(requests.ToList());
+            }
+        }
+        public ActionResult Approve(int ID)
+        {
+            var req = db.Requests.Find(ID);
+            if (req == null) return Content("Not found");
+            req.Req_Status =1;
+            db.Entry(req).State = EntityState.Modified;
+            db.SaveChanges();
+            return Redirect("/Requests/Index");
+        }
         public ActionResult GetData()
         {
             using (InventoryEntities db = new InventoryEntities())
@@ -49,7 +67,7 @@ namespace Inventory.Controllers
         // GET: Requests/Create
         public ActionResult Create()
         {
-            ViewBag.Ast_Id = new SelectList(db.Assets, "Ast_Id", "Ser_Num");
+            ViewBag.Ast_Id = new SelectList(db.Assets.Select(b=>new {ID=b.Ast_Id,Name=b.Ast_Type + "-" + b.Mod_Num + "-" + b.Ser_Num  }), "ID", "Name");
             //ViewBag.Usr_Id = new SelectList(db.Users, "Usr_Id", "F_Name");
             return View();
         }
