@@ -47,19 +47,48 @@
                     <table id="example1" class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th>User Type</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
+                                <th>Name</th>
+                                <th>Department</th>
                                 <th>Phone Number</th>
-                                <th>Created By</th>
-                                <th>Updated By</th>
+                                <th>User Type</th>
                                 <th>Created At</th>
-                                <th>Updated At</th>
-                                <th>Status</th>
-                                @*<th>Department Department Name</th>*@
+                                <th>Created By</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
+                        @foreach(var itm in Model)
+                        {
+
+
+                        <tr style="@(!itm.Status?"background-color:#f4bdbd":"")">
+                            <td>@itm.F_Name @itm.L_Name</td>
+                           
+                            <td>@itm.Department.Dep_Nam <a href="/Departments/Details/@itm.Dep_Id"><i class="fa fa-external-link"></i></a></td>
+                            <td><a href="tel:@itm.Pho_Num"><i class="fa fa-phone"></i> @itm.Pho_Num</a></td>
+                            <td>
+                                @if (@itm.Usr_Type == 1)
+                                {
+                                    <label class="badge badge-info">Admin</label>
+                                }
+                                @if (@itm.Usr_Type == 2)
+                                {
+                                    <label class="badge badge-dark">User</label>
+                                }
+                                @if (@itm.Usr_Type == 3)
+                                {
+                                    <label class="badge badge-light">Employee</label>
+                                }
+                            </td>
+                            <td>@itm.Created_At</td>
+                            <td>@itm.Created_By</td>
+                            @*<th>Department Department Name</th>*@
+                        <th>
+                            <a class="btn btn-success btn-sm fa fa-pencil" href="@Url.Action("Edit","Users",new { ID=itm.Usr_Id})" class="editUser"> Edit</a> | 
+                            <a class="btn btn-secondary btn-sm fa fa-info" href="@Url.Action("Details","Users",new { ID=itm.Usr_Id})" class="detailsUser"> Details</a> | 
+                            <a class="btn btn-danger btn-sm fa fa-trash" href="@Url.Action("Delete","Users",new { ID=itm.Usr_Id})" class="deleteUser"> Delete</a>
+                        </th>
+                        </tr>
+                        }
                     </table>
                 </div>
                 <!-- /.card-body -->
@@ -83,13 +112,13 @@
         $(document).ready(function () {
             $('#example1').dataTable({
 
-                "paging": true,
+                                        "paging": true,
                 "lengthChange": true,
                 "searching": true,
                 "ordering": true,
                 "autoWidth": true,
 
-                "ajax": {
+                @*"ajax": {
                     "url": "/Users/GetData",
                     "type": "GET",
                     "datatype": "json"
@@ -112,7 +141,7 @@
                         "searchable":false,
                         "width":"250px"
                     }
-                ]
+                ]*@
             });
         });
 

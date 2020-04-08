@@ -34,7 +34,7 @@ namespace Inventory
                     return;
                 }
                 filterContext.Result = new HttpUnauthorizedResult();
-                filterContext.HttpContext.Response.Redirect("/LoginData/?next=" + filterContext.HttpContext.Request.RawUrl);
+                filterContext.HttpContext.Response.Redirect("/Users/Login/?next=" + filterContext.HttpContext.Request.RawUrl);
                 filterContext.HttpContext.Response.End();
                 return;
             }
