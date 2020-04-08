@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Inventory.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,9 +11,21 @@ namespace Inventory.Controllers
     public class HomeController : Controller
     {
 
+        //public ActionResult Index()
+        //{
+        //    return View();
+        //}
+
+        private InventoryEntities db = new InventoryEntities();
         public ActionResult Index()
         {
-            return View();
+            Dashboard dashboard = new Dashboard();
+
+            dashboard.assets_count = db.Assets.Count();
+            dashboard.users_count = db.Users.Count();
+            dashboard.requests_app_count = db.Requests.Count(g => g.Req_Status == 1);
+            dashboard.requests_pen_count = db.Requests.Count(g => g.Req_Status == -1);
+            return View(dashboard);
         }
 
         public ActionResult About()

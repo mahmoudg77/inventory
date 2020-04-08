@@ -219,6 +219,7 @@
     <Compile Include="Requests\LoginRequest.cs" />
     <Compile Include="Responses\RecaptchaResponse.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\Dashboard.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
