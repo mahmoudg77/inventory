@@ -11,6 +11,13 @@ namespace Inventory.Models
         public int users_count { get; set; }
         public int requests_app_count { get; set; }
         public int requests_pen_count { get; set; }
+        public int requests_rej_count { get; set; }
+        public int ast_pc_count { get; set; }
+        public int ast_ip_count { get; set; }
+        public int ast_kp_count { get; set; }
+        public int ast_lp_count { get; set; }
+        public int ast_ma_count { get; set; }
+        public int ast_tp_count { get; set; }
 
     }
 }
