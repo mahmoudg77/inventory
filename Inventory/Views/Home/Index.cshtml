@@ -11,12 +11,12 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0 text-dark">Statistics</h1>
+                <h1 class="m-0 text-dark">Dashboard</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Statistics</li>
+                    <li class="breadcrumb-item active">Dashboard</li>
                 </ol>
             </div><!-- /.col -->
         </div><!-- /.row -->
@@ -49,9 +49,9 @@
                                 <div class="icon">
                                     <i class="fas fa-cubes"></i>
                                 </div>
-                                @*<a href="#" class="small-box-footer">
-                                       More info <i class="fas fa-arrow-circle-right"></i>
-                                    </a>*@
+                                <a href="~/Assets/Index" class="small-box-footer">
+                                    More info <i class="fas fa-arrow-circle-right"></i>
+                                </a>
                             </div>
                         </div>
                         <div class="col-lg-3 col-6">
@@ -65,9 +65,9 @@
                                 <div class="icon">
                                     <i class="fas fa-user-plus"></i>
                                 </div>
-                                @*<a href="#" class="small-box-footer">
+                                <a href="~/Users/Index" class="small-box-footer">
                                     More info <i class="fas fa-arrow-circle-right"></i>
-                                    </a>*@
+                                </a>
                             </div>
                         </div>
                         <!-- ./col -->
@@ -82,9 +82,9 @@
                                 <div class="icon">
                                     <i class="fas fa-clipboard-check"></i>
                                 </div>
-                                @*<a href="#" class="small-box-footer">
-                                      More info <i class="fas fa-arrow-circle-right"></i>
-                                    </a>*@
+                                <a href="~/Requests/Index?status=1" class="small-box-footer">
+                                    More info <i class="fas fa-arrow-circle-right"></i>
+                                </a>
                             </div>
                         </div>
                         <!-- ./col -->
@@ -100,9 +100,9 @@
                                 <div class="icon">
                                     <i class="fas fa-clipboard-list"></i>
                                 </div>
-                                @*<a href="#" class="small-box-footer">
-                                         More info <i class="fas fa-arrow-circle-right"></i>
-                                    </a>*@
+                                <a href="~/Requests/Index?status=-1" class="small-box-footer">
+                                    More info <i class="fas fa-arrow-circle-right"></i>
+                                </a>
                             </div>
                         </div>
                         <!-- ./col -->
@@ -116,4 +116,127 @@
         <!-- /.col -->
     </div>
     <!-- /.row -->
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card card-secondary">
+                <div class="card-header">
+                    <h3 class="card-title">Assets Chart</h3>
+
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                    <canvas id="donutChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 540px;" width="540" height="250" class="chartjs-render-monitor"></canvas>
+                </div>
+                <!-- /.card-body -->
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card card-secondary">
+                <div class="card-header">
+                    <h3 class="card-title">Requests Chart</h3>
+
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <canvas id="pieChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                </div>
+                <!-- /.card-body -->
+            </div>
+        </div>
+    </div>
 </section>
+
+@Scripts.Render("~/Content/scripts")
+<!-- ChartJS -->
+<script src="~/Content/plugins/chart.js/Chart.min.js"></script>
+
+<script>
+    $(function () {
+        /* ChartJS
+         * -------
+         * Here we will create a few charts using ChartJS
+         */
+
+        //-------------
+        //- DONUT CHART -
+        //-------------
+        // Get context with jQuery - using jQuery's .get() method.
+        var donutChartCanvas = $('#donutChart').get(0).getContext('2d')
+        var donutData = {
+            labels: [
+                'PC',
+                'KEYPOARD',
+                'LAPTOP',
+                'MAUSE',
+                'IP PHONE',
+                'TABLET',
+            ],
+            datasets: [
+                {
+                    /**/
+                    data: [@Model.ast_pc_count, @Model.ast_ip_count, @Model.ast_kp_count, @Model.ast_lp_count, @Model.ast_ma_count, @Model.ast_tp_count],
+        /**/
+        backgroundColor: ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de'],
+                 }
+                    ]
+        }
+        var donutOptions = {
+        maintainAspectRatio: false,
+        responsive: true,
+        }
+        //Create pie or douhnut chart
+        // You can switch between pie and douhnut using the method below.
+        var donutChart = new Chart(donutChartCanvas, {
+        type: 'doughnut',
+        data: donutData,
+        options: donutOptions
+        })
+
+        //-------------
+        //- PIE CHART -
+        //-------------
+        // Get context with jQuery - using jQuery's .get() method.
+        var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
+        var pieData = {
+            labels: [
+                'Aproved',
+                'Pending',
+                'Rejected',
+            ],
+            datasets: [
+                {
+                    /**/
+                    data: [@Model.requests_app_count, @Model.requests_pen_count, @Model.requests_rej_count],
+        /**/
+        backgroundColor: ['#00a65a', '#DC3545', '#f39c12'],
+                 }
+                    ]
+        }
+        var pieOptions = {
+        maintainAspectRatio: false,
+        responsive: true,
+        }
+        //Create pie or douhnut chart
+        // You can switch between pie and douhnut using the method below.
+        var pieChart = new Chart(pieChartCanvas, {
+        type: 'pie',
+        data: pieData,
+        options: pieOptions
+        })
+
+        })
+</script>
+
+
