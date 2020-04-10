@@ -9,7 +9,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-
+    <link href="~/Content/Chosen/chosen.min.css" rel="stylesheet" />
 
     @Styles.Render("~/Content/styles")
 
@@ -259,6 +259,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- ./wrapper -->
     <!-- REQUIRED SCRIPTS -->
     @Scripts.Render("~/Content/scripts")
+    <script src="~/Scripts/chosen.jquery.min.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>
