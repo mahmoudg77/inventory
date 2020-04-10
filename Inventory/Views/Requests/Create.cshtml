@@ -22,78 +22,70 @@
         {
             @Html.AntiForgeryToken()
 
-        <div class="card-body form-horizontal">
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            @*<div class="form-group">
-            @Html.LabelFor(model => model.Usr_Id, "Usr_Id", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.Display("Usr_Id", null, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Usr_Id, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
+            <div class="card-body form-horizontal">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @*<div class="form-group">
+                        @Html.LabelFor(model => model.Usr_Id, "Usr_Id", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.Display("Usr_Id", null, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Usr_Id, "", new { @class = "text-danger" })
+                        </div>
+                    </div>*@
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.Ast_Id, "Assets Details", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownList("Ast_Id", null, htmlAttributes: new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.Ast_Id, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Ast_Id, "Assets Details", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("Ast_Id", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Ast_Id, "", new { @class = "text-danger" })
+                    </div>
                 </div>
-                <script>
-                    $(document).ready(function () {
-                        $("Ast_Id").chosen();
-                    }
-                    )
-                </script>
-            </div>
 
+                @*<div class="form-group">
+                        @Html.LabelFor(model => model.Created_By, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Created_By, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Created_By, "", new { @class = "text-danger" })
+                        </div>
+                    </div>*@
 
+                @*<div class="form-group">
+                        @Html.LabelFor(model => model.Updated_By, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Updated_By, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Updated_By, "", new { @class = "text-danger" })
+                        </div>
+                    </div>*@
 
-            @*<div class="form-group">
-            @Html.LabelFor(model => model.Created_By, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Created_By, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Created_By, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
+                @*<div class="form-group">
+                        @Html.LabelFor(model => model.Created_At, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Created_At, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Created_At, "", new { @class = "text-danger" })
+                        </div>
+                    </div>*@
 
-            @*<div class="form-group">
-            @Html.LabelFor(model => model.Updated_By, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Updated_By, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Updated_By, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
+                @*<div class="form-group">
+                        @Html.LabelFor(model => model.Updated_At, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Updated_At, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Updated_At, "", new { @class = "text-danger" })
+                        </div>
+                    </div>*@
 
-            @*<div class="form-group">
-            @Html.LabelFor(model => model.Created_At, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Created_At, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Created_At, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
-
-            @*<div class="form-group">
-            @Html.LabelFor(model => model.Updated_At, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Updated_At, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Updated_At, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Priority, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    <input type="number" name="Priority" class = "form-control" />
-                    @Html.ValidationMessageFor(model => model.Priority, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Priority, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <input type="number" name="Priority" class="form-control" />
+                        @Html.ValidationMessageFor(model => model.Priority, "", new { @class = "text-danger" })
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                <div class=" col-md-10">
-                    <input type="submit" value="Create" class="btn btn-primary" />
+                <div class="form-group">
+                    <div class=" col-md-10">
+                        <input type="submit" value="Create" class="btn btn-primary" />
+                    </div>
                 </div>
             </div>
-        </div>
         }
     </div>
     <div>
@@ -103,4 +95,9 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(function () {
+            $("#Ast_Id").chosen();
+        });
+    </script>
 }
