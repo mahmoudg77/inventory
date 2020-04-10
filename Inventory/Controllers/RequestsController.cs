@@ -56,6 +56,7 @@ namespace Inventory.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            var Request = db.Requests.Include(r => r.Asset).Include(a => a.User).ToList();
             Request request = db.Requests.Find(id);
             if (request == null)
             {

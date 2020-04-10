@@ -52,27 +52,24 @@
                     <table id="example1" class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th>Created By</th>
-                                <th>Updated By</th>
-                                <th>Created At</th>
-                                <th>Updated At</th>
+                                <th>Request Number</th>
+                                <th>User</th>
+                                <th>Assets Type</th>
+                                <th>Serial Number</th>
                                 <th>Priority</th>
-                                <th>Status</th>
-                                @*<th>Serial Number</th>
-        <th>Transaction Created By</th>
-        <th>First Name</th>*@
+                                <th>Serial Number</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         @foreach(var itm in Model)
                         {
                     <tr>
-                        <td>@itm.Created_By</td>
-                        <td>@itm.Updated_By</td>
-                        <td>@itm.Created_At</td>
-                        <td>@itm.Updated_At</td>
+                        <td>@itm.Req_Id</td>
+                        <td>@itm.User.F_Name</td>
+                        <td>@itm.Asset.Ast_Type</td>
+                        <td>@itm.Asset.Ser_Num</td>
                         <td>@itm.Priority</td>
-                        @*<th>@itm.Req_Status</th>*@
+                       
                     <td>
                         @if (itm.Req_Status == -1)
                         {

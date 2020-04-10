@@ -28,89 +28,63 @@
     </div><!-- /.container-fluid -->
 </section>
 
+    <section class="content">
+        <div class="card bg-light mb-3">
+            <div class="card-body">
+                <dl class="dl-horizontal">
 
-<section class="content">
-    <div class="card bg-light mb-3">
-        <div class="card-body">
+                    <dt>
+                        @Html.DisplayName("Request Number :")
+                    </dt>
 
-            <dl class="dl-horizontal" padding-left: 5px;>
+                    <dd>
+                        @Html.DisplayFor(model => model.Req_Id)
+                    </dd>
 
-                <dt>
-                    @Html.DisplayName("Created By :")
-                </dt>
+                    <dt>
+                        @Html.DisplayName("User :")
+                    </dt>
 
-                <dd>
-                    @Html.DisplayFor(model => model.Created_By)
-                </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.User.F_Name)
+                    </dd>
 
-                <dt>
-                    @Html.DisplayName("Updated By :")
-                </dt>
+                    <dt>
+                        @Html.DisplayName("Assets Type :")
+                    </dt>
 
-                <dd>
-                    @Html.DisplayFor(model => model.Updated_By)
-                </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.Asset.Ast_Type)
+                    </dd>
 
-                <dt>
-                    @Html.DisplayName("Created At :")
-                </dt>
+                    <dt>
+                        @Html.DisplayName("Serial Number :")
+                    </dt>
 
-                <dd>
-                    @Html.DisplayFor(model => model.Created_At)
-                </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.Asset.Ser_Num)
+                    </dd>
 
-                <dt>
-                    @Html.DisplayName("Updated At :")
-                </dt>
+                    <dt>
+                        @Html.DisplayName("Priority :")
+                    </dt>
 
-                <dd>
-                    @Html.DisplayFor(model => model.Updated_At)
-                </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.Priority)
+                    </dd>
 
-                <dt>
-                    @Html.DisplayName("Priority :")
-                </dt>
+                </dl>
+            </div>
 
-                <dd>
-                    @Html.DisplayFor(model => model.Priority)
-                </dd>
+            <div>
+                <a class="btn btn-success btn-sm fa fa-pencil" href="@Url.Action("Approve","Requests",new { ID = Model.Req_Id })" class="editRequest"> Approve</a> |
 
-                @*<dt>
-                    @Html.DisplayName("Asset Serial Number :")
-                </dt>
+                <a class="btn btn-danger btn-sm fa fa-trash" href="@Url.Action("Reject","Requests",new { ID = Model.Req_Id })" class="deleteRequest"> Reject</a>
 
-                <dd>
-                    @Html.DisplayFor(model => model.Asset.Ser_Num)
-                </dd>
-
-                <dt>
-                    @Html.DisplayName("Transaction Created By :")
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.Transaction.Created_By)
-                </dd>
-
-                <dt>
-                    @Html.DisplayName("First Name :")
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.User.F_Name)
-                </dd>*@
-
-            </dl>
+            </div>
         </div>
+        <p>
 
-        <div>
-            <a class="btn btn-success btn-sm fa fa-pencil" href="@Url.Action("Approve","Requests",new { ID = Model.Req_Id })" class="editRequest"> Approve</a> |
-
-            <a class="btn btn-danger btn-sm fa fa-trash" href="@Url.Action("Reject","Requests",new { ID = Model.Req_Id })" class="deleteRequest"> Reject</a>
-
-        </div>
-    </div>
-    <p>
-
-        @Html.ActionLink("Back to List", "Index")
-    </p>
-</section>
+            @Html.ActionLink("Back to List", "Index")
+        </p>
+    </section>
