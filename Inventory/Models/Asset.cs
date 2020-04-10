@@ -29,7 +29,7 @@ namespace Inventory.Models
         public string Created_By { get; set; }
         public string Updated_By { get; set; }
         public System.DateTime Created_At { get; set; }
-        public System.DateTime Updated_At { get; set; }
+        public Nullable<System.DateTime> Updated_At { get; set; }
         public bool Is_Active { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -10,7 +10,7 @@ using Inventory.Models;
 
 namespace Inventory.Controllers
 {
-    [RoleFilter(new int[] { 3 })]
+    [LoginFilter]
     public class RequestsController : Controller
     {
         private InventoryEntities db = new InventoryEntities();

@@ -21,7 +21,7 @@ namespace Inventory.Models
         public string Created_By { get; set; }
         public string Updated_By { get; set; }
         public System.DateTime Created_At { get; set; }
-        public System.DateTime Updated_At { get; set; }
+        public Nullable<System.DateTime> Updated_At { get; set; }
         public string Priority { get; set; }
     
         public virtual Asset Asset { get; set; }

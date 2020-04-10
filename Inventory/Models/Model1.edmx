@@ -16,9 +16,9 @@
           <Property Name="Cost" Type="int" />
           <Property Name="Date" Type="date" Nullable="false" />
           <Property Name="Created_By" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="Updated_By" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Updated_By" Type="nvarchar" MaxLength="100" />
           <Property Name="Created_At" Type="datetime" Nullable="false" />
-          <Property Name="Updated_At" Type="datetime" Nullable="false" />
+          <Property Name="Updated_At" Type="datetime" />
           <Property Name="Is_Active" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Departments">
@@ -28,9 +28,9 @@
           <Property Name="Dep_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Dep_Nam" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Created_By" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="Updated_By" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Updated_By" Type="nvarchar" MaxLength="100" />
           <Property Name="Created_At" Type="datetime" Nullable="false" />
-          <Property Name="Updated_At" Type="datetime" Nullable="false" />
+          <Property Name="Updated_At" Type="datetime" />
           <Property Name="Priority" Type="smallint" Nullable="false" />
         </EntityType>
         <EntityType Name="Requests">
@@ -42,9 +42,9 @@
           <Property Name="Ast_Id" Type="int" Nullable="false" />
           <Property Name="Req_Status" Type="int" Nullable="false" />
           <Property Name="Created_By" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="Updated_By" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Updated_By" Type="nvarchar" MaxLength="100" />
           <Property Name="Created_At" Type="datetime" Nullable="false" />
-          <Property Name="Updated_At" Type="datetime" Nullable="false" />
+          <Property Name="Updated_At" Type="datetime" />
           <Property Name="Priority" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="Users">
@@ -58,9 +58,9 @@
           <Property Name="Pho_Num" Type="nvarchar" MaxLength="13" Nullable="false" />
           <Property Name="Dep_Id" Type="int" Nullable="false" />
           <Property Name="Created_By" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="Updated_By" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Updated_By" Type="nvarchar" MaxLength="100" />
           <Property Name="Created_At" Type="datetime" Nullable="false" />
-          <Property Name="Updated_At" Type="datetime" Nullable="false" />
+          <Property Name="Updated_At" Type="datetime" />
           <Property Name="Status" Type="bit" Nullable="false" />
           <Property Name="Email" Type="nvarchar" MaxLength="150" Nullable="false" />
           <Property Name="Password" Type="nvarchar" MaxLength="150" Nullable="false" />
@@ -118,9 +118,9 @@
           <Property Name="Cost" Type="Int32" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Created_By" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Updated_By" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Updated_By" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Created_At" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Updated_At" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Updated_At" Type="DateTime" Precision="3" />
           <Property Name="Is_Active" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Requests" Relationship="InventoryModel.FK_Requests_Users" FromRole="Asset" ToRole="Request" />
         </EntityType>
@@ -131,9 +131,9 @@
           <Property Name="Dep_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Dep_Nam" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Created_By" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Updated_By" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Updated_By" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Created_At" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Updated_At" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Updated_At" Type="DateTime" Precision="3" />
           <Property Name="Priority" Type="Int16" Nullable="false" />
           <NavigationProperty Name="Users" Relationship="Self.FK_Users_Departments" FromRole="Departments" ToRole="Users" />
         </EntityType>
@@ -148,9 +148,9 @@
           <Property Name="Pho_Num" Type="String" MaxLength="13" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Dep_Id" Type="Int32" Nullable="false" />
           <Property Name="Created_By" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Updated_By" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Created_At" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Updated_At" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Updated_By" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Created_At" Type="DateTime" Precision="3" Nullable="false" />
+          <Property Name="Updated_At" Type="DateTime" Precision="3" />
           <Property Name="Status" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Department" Relationship="Self.FK_Users_Departments" FromRole="Users" ToRole="Departments" />
           <Property Name="Email" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
@@ -196,9 +196,9 @@
           <Property Name="Ast_Id" Type="Int32" Nullable="false" />
           <Property Name="Req_Status" Type="Int32" Nullable="false" />
           <Property Name="Created_By" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Updated_By" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Updated_By" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Created_At" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Updated_At" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Updated_At" Type="DateTime" Precision="3" />
           <Property Name="Priority" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Asset" Relationship="InventoryModel.FK_Requests_Users" FromRole="Request" ToRole="Asset" />
           <NavigationProperty Name="User" Relationship="InventoryModel.FK_Requests_Users1" FromRole="Request" ToRole="User" />

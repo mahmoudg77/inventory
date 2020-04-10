@@ -54,7 +54,8 @@ namespace Inventory.Controllers
         public ActionResult Create()
         {
             ViewBag.Dep_Id = new SelectList(db.Departments, "Dep_Id", "Dep_Nam");
-            return View();
+
+            return View(new User());
         }
 
         // POST: Users/Create
@@ -63,12 +64,25 @@ namespace Inventory.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [RoleFilter(new int[] { 1 })]
-        public ActionResult Create([Bind(Include = "Usr_Id,Usr_Type,F_Name,L_Name,Pho_Num,Dep_Id,Created_By,Updated_By,Created_At,Updated_At,Status")] User user)
+        public ActionResult Create([Bind(Include = "Usr_Id,Usr_Type,F_Name,L_Name,Pho_Num,Dep_Id,Password,Email")] User user)
         {
             if (ModelState.IsValid)
             {
                 db.Users.Add(user);
+                user.Created_At = DateTime.Now;
+                user.Created_By = UserSession.User.F_Name + " " + UserSession.User.L_Name;
+               
+                user.Status = true;
+                try
+                {
                 db.SaveChanges();
+
+                }
+                catch (Exception ex )
+                {
+
+                    throw ex;
+                }
                 return RedirectToAction("Index");
             }
 
@@ -99,12 +113,34 @@ namespace Inventory.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [RoleFilter(new int[] { 1 })]
-        public ActionResult Edit([Bind(Include = "Usr_Id,Usr_Type,F_Name,L_Name,Pho_Num,Dep_Id,Created_By,Updated_By,Created_At,Updated_At,Status")] User user)
+        public ActionResult Edit([Bind(Include = "Usr_Id,Usr_Type,F_Name,L_Name,Pho_Num,Dep_Id,Status")] User user)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(user).State = EntityState.Modified;
-                db.SaveChanges();
+
+                var dbUser=db.Users.Find(user.Usr_Id);//.State = EntityState.Modified;
+                dbUser.Updated_At = DateTime.Now;
+                dbUser.Updated_By = UserSession.User.F_Name + " " + UserSession.User.L_Name;
+
+                dbUser.Usr_Id = user.Usr_Id;
+                dbUser.Usr_Type = user.Usr_Type;
+                dbUser.F_Name = user.F_Name;
+                dbUser.L_Name = user.L_Name;
+                dbUser.Pho_Num = user.Pho_Num;
+                dbUser.Dep_Id = user.Dep_Id;
+                dbUser.Status = user.Status;
+
+                try
+                {
+                    db.SaveChanges();
+
+                }
+                catch (Exception ex)
+                {
+
+                    throw ex;
+                }
+
                 return RedirectToAction("Index");
             }
             ViewBag.Dep_Id = new SelectList(db.Departments, "Dep_Id", "Dep_Nam", user.Dep_Id);
