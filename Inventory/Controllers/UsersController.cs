@@ -54,6 +54,7 @@ namespace Inventory.Controllers
         public ActionResult Create()
         {
             ViewBag.Dep_Id = new SelectList(db.Departments, "Dep_Id", "Dep_Nam");
+            ViewBag.Usr_Type = new SelectList(new[] { new { ID = 1, Name = "Admin" }, new { ID = 2, Name = "User" }, new { ID = 3, Name = "Employee" } }, "ID", "Name",3);
 
             return View(new User());
         }
@@ -69,13 +70,17 @@ namespace Inventory.Controllers
             if (ModelState.IsValid)
             {
                 db.Users.Add(user);
+                var password = user.Password;
+
+                user.Password = BLL.SecurityHelper.MD5(password);
                 user.Created_At = DateTime.Now;
                 user.Created_By = UserSession.User.F_Name + " " + UserSession.User.L_Name;
                
                 user.Status = true;
                 try
                 {
-                db.SaveChanges();
+                    db.SaveChanges();
+                    BLL.EmailHelper.SendMail(user.Email, "Register", "<strong>Dear, " + user.F_Name + " " + user.L_Name + "</strong><br/>Your account just created has " + (user.Usr_Type==1?"Admin":(user.Usr_Type==2?"User":"Employee")) + " privilege and password (<span color='red'>"+password+"</span>)<br/>Thank you, <br/> ");
 
                 }
                 catch (Exception ex )
@@ -104,6 +109,7 @@ namespace Inventory.Controllers
                 return HttpNotFound();
             }
             ViewBag.Dep_Id = new SelectList(db.Departments, "Dep_Id", "Dep_Nam", user.Dep_Id);
+            ViewBag.Usr_Type = new SelectList(new[] { new {ID=1,Name="Admin" }, new { ID = 2, Name = "User" }, new { ID = 3, Name = "Employee" } }, "ID", "Name", user.Usr_Type);
             return View(user);
         }
 
@@ -113,22 +119,22 @@ namespace Inventory.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [RoleFilter(new int[] { 1 })]
-        public ActionResult Edit([Bind(Include = "Usr_Id,Usr_Type,F_Name,L_Name,Pho_Num,Dep_Id,Status")] User user)
+        public ActionResult Edit([Bind(Include = "Usr_Id,Usr_Type,F_Name,L_Name,Pho_Num,Dep_Id")] User user)
         {
             if (ModelState.IsValid)
             {
-
                 var dbUser=db.Users.Find(user.Usr_Id);//.State = EntityState.Modified;
+               
+                    dbUser.Usr_Id = user.Usr_Id;
+                    dbUser.Usr_Type = user.Usr_Type;
+                    dbUser.F_Name = user.F_Name;
+                    dbUser.L_Name = user.L_Name;
+                    dbUser.Pho_Num = user.Pho_Num;
+                    dbUser.Dep_Id = user.Dep_Id;
+                    //dbUser.Status = user.Status;
+                 
                 dbUser.Updated_At = DateTime.Now;
                 dbUser.Updated_By = UserSession.User.F_Name + " " + UserSession.User.L_Name;
-
-                dbUser.Usr_Id = user.Usr_Id;
-                dbUser.Usr_Type = user.Usr_Type;
-                dbUser.F_Name = user.F_Name;
-                dbUser.L_Name = user.L_Name;
-                dbUser.Pho_Num = user.Pho_Num;
-                dbUser.Dep_Id = user.Dep_Id;
-                dbUser.Status = user.Status;
 
                 try
                 {
@@ -145,6 +151,102 @@ namespace Inventory.Controllers
             }
             ViewBag.Dep_Id = new SelectList(db.Departments, "Dep_Id", "Dep_Nam", user.Dep_Id);
             return View(user);
+        }
+        // POST: Users/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [RoleFilter(new int[] { 1 })]
+        public ActionResult SendNewPassword(int id)
+        {
+            
+            var user = db.Users.Find(id);//.State = EntityState.Modified;
+            var password= BLL.SecurityHelper.GeneratePassword(11);
+            user.Password = BLL.SecurityHelper.MD5(password);
+
+            user.Updated_At = DateTime.Now;
+            user.Updated_By = UserSession.User.F_Name + " " + UserSession.User.L_Name;
+
+            try
+            {
+                db.SaveChanges();
+
+                BLL.EmailHelper.SendMail(user.Email, "New Password", "<strong>Dear, " + user.F_Name + " " + user.L_Name + "</strong><br/>Your password changed to (<span color='red'>" + password + "</span>).<br/>Thank you, <br/> ");
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+             
+            ViewBag.Dep_Id = new SelectList(db.Departments, "Dep_Id", "Dep_Nam", user.Dep_Id);
+            return RedirectToAction("Edit",new { id=user.Usr_Id});
+        }
+
+        // POST: Users/Activate/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [RoleFilter(new int[] { 1 })]
+        public ActionResult Activate(int id)
+        {
+            var user = db.Users.Find(id);//.State = EntityState.Modified;
+            
+
+                user.Status = true;
+
+                user.Updated_At = DateTime.Now;
+                user.Updated_By = UserSession.User.F_Name + " " + UserSession.User.L_Name;
+
+                try
+                {
+                    db.SaveChanges();
+                    BLL.EmailHelper.SendMail(user.Email, "Account Activation", "<strong>Dear, " + user.F_Name + " " + user.L_Name + "</strong><br/>Your account just activated.<br/>Thank you, <br/>");
+
+                }
+            catch (Exception ex)
+                {
+                    throw ex;
+                }
+
+        
+           
+            ViewBag.Dep_Id = new SelectList(db.Departments, "Dep_Id", "Dep_Nam", user.Dep_Id);
+            return RedirectToAction("Edit", new { id = user.Usr_Id });
+        }
+        // POST: Users/DeActivate/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [RoleFilter(new int[] { 1 })]
+        public ActionResult DeActivate(int id)
+        {
+            var user = db.Users.Find(id);//.State = EntityState.Modified;
+            
+                user.Status = false;
+
+                user.Updated_At = DateTime.Now;
+                user.Updated_By = UserSession.User.F_Name + " " + UserSession.User.L_Name;
+
+                try
+                {
+                    db.SaveChanges();
+                BLL.EmailHelper.SendMail(user.Email, "Account Activation", "<strong>Dear, " + user.F_Name + " " + user.L_Name + "</strong><br/>Sorry, Your account just suspended.<br/>Thank you, <br/>");
+
+            }
+            catch (Exception ex)
+                {
+                    throw ex;
+                }
+                ViewBag.Dep_Id = new SelectList(db.Departments, "Dep_Id", "Dep_Nam", user.Dep_Id);
+                return RedirectToAction("Edit", new { id = user.Usr_Id });
+          
+
         }
 
         // GET: Users/Delete/5
@@ -217,7 +319,7 @@ namespace Inventory.Controllers
             //Session.RemoveAll();
 
             //Session.Add("USER_ID", user.Usr_Id);
-            var user = UserSession.Login(request.Email, request.Password,request.Remember).Result;
+            var user = UserSession.Login(request.Email, BLL.SecurityHelper.MD5(request.Password),request.Remember).Result;
             if (user == null)
             {
                 ViewBag.error = "Invalid User Data !";

@@ -11,7 +11,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h2>Edit User</h2>
+                <h2> <a href="/Users" class="btn btn-primary"><i class="fa fa-arrow-left"></i></a>  Edit User</h2>
             </div>
         </div>
     </div><!-- /.container-fluid -->
@@ -20,75 +20,146 @@
 <section class="content">
     <div class="card bg-light mb-3">
         <div class="card-body">
-            @using (Html.BeginForm())
+            <div class="form-horizontal">
+            @using (Html.BeginForm("Edit", "Users",new {id=Model.Usr_Id }, FormMethod.Post, new { @id = "EditForm" }))
             {
                 @Html.AntiForgeryToken()
 
-            <div class="form-horizontal">
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 @Html.HiddenFor(model => model.Usr_Id)
 
+                <fieldset>
+                    <legend>Personal Data:</legend>
 
-                <div class="row form-group">
-                    @Html.LabelFor(model => model.F_Name, "First Name :", htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-4">
-                        @Html.EditorFor(model => model.F_Name, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.F_Name, "", new { @class = "text-danger" })
-                    </div>
-                
-                    @Html.LabelFor(model => model.L_Name, "Last Name :", htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-4">
-                        @Html.EditorFor(model => model.L_Name, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.L_Name, "", new { @class = "text-danger" })
-                    </div>
-                </div>
+                    <div class="row form-group">
+                        @Html.LabelFor(model => model.F_Name, "First Name :", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.F_Name, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.F_Name, "", new { @class = "text-danger" })
+                        </div>
 
-                <div class="row form-group">
-                    @Html.LabelFor(model => model.Pho_Num, "Phone Number :", htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-4">
-                        @Html.EditorFor(model => model.Pho_Num, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Pho_Num, "", new { @class = "text-danger" })
-                    </div>
-            
-                    @Html.LabelFor(model => model.Usr_Type, "User Type :", htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-4">
-                        @Html.EditorFor(model => model.Usr_Type, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Usr_Type, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="row form-group">
-                    @Html.LabelFor(model => model.Dep_Id, "Department Id :", htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-4">
-                        @Html.DropDownList("Dep_Id", null, htmlAttributes: new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.Dep_Id, "", new { @class = "text-danger" })
-                    </div>
-              
-                    @Html.LabelFor(model => model.Status, "Active? :", htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-4">
-                        <div class="checkbox">
-                            @Html.EditorFor(model => model.Status)
-                            @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                        @Html.LabelFor(model => model.L_Name, "Last Name :", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.L_Name, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.L_Name, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                </div>
 
+                    <div class="row form-group">
+                        @Html.LabelFor(model => model.Pho_Num, "Phone Number :", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.Pho_Num, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Pho_Num, "", new { @class = "text-danger" })
+                        </div>
+                        @Html.LabelFor(model => model.Dep_Id, "Department Id :", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @Html.DropDownList("Dep_Id", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Dep_Id, "", new { @class = "text-danger" })
+                        </div>
+
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend>Security Data:</legend>
+                    <div class="row form-group">
+                        @Html.LabelFor(model => model.Created_By, "Email :", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Created_By, "", new { @class = "text-danger" })
+                        </div>
+
+                        @Html.LabelFor(model => model.Created_By, "Password :", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        <label class="badge badge-dark">##Encrypted##</label>
+
+                    </div>
+
+                    </div>
+                    <div class="row form-group">
+
+                        @Html.LabelFor(model => model.Usr_Type, "User Type :", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @Html.DropDownList("Usr_Type", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Usr_Type, "", new { @class = "text-danger" })
+                        </div>
+                        @Html.LabelFor(model => model.Status, "Active? :", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            <div class="checkbox">
+                                @if (Model.Status)
+                                {
+
+                                <label class="badge badge-success">Yes</label>
+                                }
+                                else
+                                {
+
+                                <label class="badge badge-danger">No</label>
+                                }
+
+                                @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+
+            }
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Save" class="btn btn-primary" />
+                        <a href="/Users" class="btn btn-primary"><i class="fa fa-arrow-left"></i></a>
+                        <button type="button" id="save" class="btn btn-primary"><i class="fa fa-save"></i> Save Changes</button>
+                        <button type="button" id="resetpassword" class="btn btn btn-info"><i class="fa fa-key"></i> Send new password</button>
+
+                        @if (Model.Status)
+                        {
+                            <button type="button" id="activate" class="btn btn-danger"><i class="fa fa-lock"></i> De-Activate User</button>
+                            using (Html.BeginForm("DeActivate", "Users", new { ID = Model.Usr_Id }, FormMethod.Post, new { @id = "ActiveForm" }))
+                            {
+                                @Html.AntiForgeryToken()
+                            }
+                        }
+                        else
+                        {
+                            <button type="button" id="activate" class="btn btn-success"><i class="fa fa-unlock"></i> Activate User</button>
+                            using (Html.BeginForm("Activate", "Users", new { ID = Model.Usr_Id }, FormMethod.Post, new { @id = "ActiveForm" }))
+                            {@Html.AntiForgeryToken()}
+
+                    }
+                        @using (Html.BeginForm("SendNewPassword", "Users", new { ID = Model.Usr_Id }, FormMethod.Post, new { @id = "PasswordForm" }))
+                        {
+                            @Html.AntiForgeryToken()
+                        }
                     </div>
                 </div>
             </div>
-            }
         </div>
     </div>
-    <div>
-        @Html.ActionLink("Back to List", "Index")
-    </div>
+     
 </section>
 
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+
+    <script>
+        $(function () {
+            $("#save").click(function () {
+                $(this).find("i").addClass("fa-spinner fa-spin").attr("disabled", true);
+                $("#EditForm").submit();
+            })
+
+            $("#activate").click(function () {
+                $(this).find("i").addClass("fa-spinner fa-spin").attr("disabled", true);
+
+                $("#ActiveForm").submit();
+            });
+            $("#resetpassword").click(function () {
+                $(this).find("i").addClass("fa-spinner fa-spin").attr("disabled", true);
+
+                $("#PasswordForm").submit();
+            });
+
+        })
+    </script>
 }
 

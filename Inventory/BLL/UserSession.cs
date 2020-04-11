@@ -40,7 +40,7 @@ namespace Inventory
             using (var ctx=new InventoryEntities())
             {
 
-                User u = ctx.Users.Where(a => a.Email == Email && a.Password==Password).FirstOrDefault();
+                User u = ctx.Users.Where(a => a.Email == Email && a.Password==Password && a.Status==true).FirstOrDefault();
                  
 
                 if (u == null) return null;

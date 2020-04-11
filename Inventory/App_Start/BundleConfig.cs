@@ -21,7 +21,8 @@ namespace Inventory
                       "~/Content/plugins/icheck-bootstrap/icheck-bootstrap.min.css",
                       "~/Content/dist/css/ionicons.min.css",
                       "~/Content/plugins/datatables-bs4/css/dataTables.bootstrap4.css",
-                      "~/Content/dist/css/adminlte.min.css"
+                      "~/Content/dist/css/adminlte.min.css",
+                      "~/Content/Site.css"
                                             ));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
