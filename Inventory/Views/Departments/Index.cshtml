@@ -47,10 +47,10 @@
                         <thead>
                             <tr>
                                 <th>Department Name</th>
-                                <th>Created By</th>
-                                <th>Updated By</th>
-                                <th>Created At</th>
-                                <th>Updated At</th>
+                                @*<th>Created By</th>
+                                <th>Updated By</th>*@
+                                @*<th>Created At</th>*@
+                                @*<th>Updated At</th>*@
                                 <th>Priority</th>
                                 <th>Actions</th>
                             </tr>
@@ -92,10 +92,10 @@
                 },
                 "columns": [
                     { "data": "Dep_Nam","width":"auto" },
-                    { "data": "Created_By","width":"auto" },
-                    { "data": "Updated_By","width":"auto" },
-                    { "data": "Created_At","width":"auto" },
-                    { "data": "Updated_At","width":"auto" },
+                    //{ "data": "Created_By","width":"auto" },
+                    //{ "data": "Updated_By","width":"auto" },
+                    //{ "data": "Created_At","width":"auto" },
+                    //{ "data": "Updated_At","width":"auto" },
                     { "data": "Priority","width":"auto" },
                     { "data": "Dep_Id", "render": function (data, type, full, meta) {
                          return '<a class="btn btn-success btn-sm fa fa-pencil" href="@Url.Action("Edit","Departments")?id=' + data + '" class="editDepartment"> Edit</a> | <a class="btn btn-secondary btn-sm fa fa-info" href="@Url.Action("Details","Departments")?id=' + data + '" class="detailsDepartment"> Details</a> | <a class="btn btn-danger btn-sm fa fa-trash" href="@Url.Action("Delete","Departments")?id=' + data + '" class="deleteDepartment"> Delete</a>';
