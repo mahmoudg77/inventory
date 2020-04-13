@@ -8,6 +8,7 @@ using System.Web.Mvc;
 namespace Inventory.Controllers
 {
     [LoginFilter]
+    [RequireHttps]
     public class HomeController : Controller
     {
 
