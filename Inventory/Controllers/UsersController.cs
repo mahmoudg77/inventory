@@ -295,7 +295,7 @@ namespace Inventory.Controllers
         [HttpPost, ActionName("Login")]
         [GRecaptcha]
         [ValidateAntiForgeryToken]
-        public ActionResult postLogin(Requests.LoginRequest request, string next = "/")
+        public ActionResult postLogin(Requests2.LoginRequest request, string next = "/")
         {
            if(!ModelState.IsValid)
             {
