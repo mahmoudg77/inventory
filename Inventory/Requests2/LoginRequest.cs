@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace Inventory.Requests
+namespace Inventory.Requests2
 {
     public class LoginRequest
     {

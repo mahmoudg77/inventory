@@ -10,6 +10,7 @@ using Inventory.Models;
 
 namespace Inventory.Controllers
 {
+    [RoleFilter(new int[] { 1, 2 })]
     public class AssetsController : Controller
     {
         private InventoryEntities db = new InventoryEntities();
@@ -57,11 +58,14 @@ namespace Inventory.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Ast_Id,Ser_Num,Mod_Num,Ast_Type,Cost,Date,Created_By,Updated_By,Created_At,Updated_At,Is_Active")] Asset asset)
+        public ActionResult Create([Bind(Include = "Ast_Id,Ser_Num,Mod_Num,Ast_Type,Cost,Is_Active")] Asset asset) 
         {
             if (ModelState.IsValid)
             {
                 db.Assets.Add(asset);
+                asset.Date = DateTime.Now;
+                asset.Created_At = DateTime.Now;
+                asset.Created_By = UserSession.User.F_Name + " " + UserSession.User.L_Name;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -94,6 +98,8 @@ namespace Inventory.Controllers
             if (ModelState.IsValid)
             {
                 db.Entry(asset).State = EntityState.Modified;
+                asset.Updated_At = DateTime.Now;
+                asset.Updated_By = UserSession.User.F_Name + " " + UserSession.User.L_Name;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

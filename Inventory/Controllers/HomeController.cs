@@ -25,8 +25,8 @@ namespace Inventory.Controllers
             dashboard.assets_count = db.Assets.Count();
             dashboard.users_count = db.Users.Count();
             dashboard.requests_app_count = db.Requests.Count(g => g.Req_Status == 1);
-            dashboard.requests_pen_count = db.Requests.Count(g => g.Req_Status == -1);
-            dashboard.requests_rej_count = db.Requests.Count(g => g.Req_Status == 0);
+            dashboard.requests_pen_count = db.Requests.Count(g => g.Req_Status == 0);
+            dashboard.requests_rej_count = db.Requests.Count(g => g.Req_Status == -1);
             dashboard.ast_pc_count = db.Assets.Count(g => g.Ast_Type == "PC");
             dashboard.ast_ip_count = db.Assets.Count(g => g.Ast_Type == "IP PHONE");
             dashboard.ast_kp_count = db.Assets.Count(g => g.Ast_Type == "KEYPOARD");

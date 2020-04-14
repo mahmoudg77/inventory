@@ -18,7 +18,7 @@ namespace Inventory.Controllers
         // GET: Requests
         public ActionResult Index(int? status)
         {
-            if(status != null)
+            if (status != null)
             {
 
             var requests = db.Requests.Include(r => r.Asset).Include(r => r.User).Where(a=>a.Req_Status==status);
@@ -40,6 +40,17 @@ namespace Inventory.Controllers
             db.SaveChanges();
             return Redirect("/Requests/Index");
         }
+        
+        public ActionResult Reject(int ID)
+        {
+            var req = db.Requests.Find(ID);
+            if (req == null) return Content("Not found");
+            req.Req_Status = -1;
+            db.Entry(req).State = EntityState.Modified;
+            db.SaveChanges();
+            return Redirect("/Requests/Index");
+        }
+
         public ActionResult GetData()
         {
             using (InventoryEntities db = new InventoryEntities())
@@ -86,18 +97,17 @@ namespace Inventory.Controllers
                 request.Usr_Id = UserSession.User.Usr_Id;
                 request.Created_By = UserSession.User.F_Name + UserSession.User.L_Name;
                 request.Created_At = DateTime.Now;
-                request.Updated_At = DateTime.Now;
-                request.Updated_By = UserSession.User.F_Name + UserSession.User.L_Name;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Ast_Id = new SelectList(db.Assets, "Ast_Id", "Ser_Num", request.Ast_Id);
-            ViewBag.Usr_Id = new SelectList(db.Users, "Usr_Id", "F_Name", request.Usr_Id);
+            //ViewBag.Ast_Id = new SelectList(db.Assets, "Ast_Id", "Ser_Num", request.Ast_Id);
+            //ViewBag.Usr_Id = new SelectList(db.Users, "Usr_Id", "F_Name", request.Usr_Id);
             return View(request);
         }
 
         // GET: Requests/Edit/5
+        [RoleFilter(new int[] { 1,2 })]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -119,11 +129,14 @@ namespace Inventory.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [RoleFilter(new int[] { 1,2 })]
         public ActionResult Edit([Bind(Include = "Req_Id,Usr_Id,Ast_Id,Tra_Id,Created_By,Updated_By,Created_At,Updated_At,Priority")] Request request)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(request).State = EntityState.Modified;
+                request.Updated_At = DateTime.Now;
+                request.Updated_By = UserSession.User.F_Name + UserSession.User.L_Name;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -133,6 +146,7 @@ namespace Inventory.Controllers
         }
 
         // GET: Requests/Delete/5
+        [RoleFilter(new int[] { 1, 2 })]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -150,6 +164,7 @@ namespace Inventory.Controllers
         // POST: Requests/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [RoleFilter(new int[] { 1, 2 })]
         public ActionResult DeleteConfirmed(int id)
         {
             Request request = db.Requests.Find(id);

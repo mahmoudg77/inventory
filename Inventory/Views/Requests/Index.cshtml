@@ -15,7 +15,6 @@
 <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
 
-
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <div class="container-fluid">
@@ -40,9 +39,9 @@
             <div class="card">
                 <div class="card-header">
                     @Html.ActionLink(" Create New", "Create", null, new { @class = "btn btn-info fa fa-plus" })
-                    <a href="~/Requests/Index?status=-1" class="btn btn-info fa fa-spiner">Pending Requests</a>
+                    <a href="~/Requests/Index?status=0" class="btn btn-info fa fa-spiner">Pending Requests</a>
                     <a href="~/Requests/Index?status=1" class="btn btn-info fa fa-like-up">Approved Requests</a>
-                    <a href="~/Requests/Index?status=0" class="btn btn-info fa fa-like-down">Rejected Requests</a>
+                    <a href="~/Requests/Index?status=-1" class="btn btn-info fa fa-like-down">Rejected Requests</a>
                     @*@Html.ActionLink(" Waiting Requests", "Index",new { status=-1}, new { @class = "btn btn-info fa fa" })
                     @Html.ActionLink(" Approved Requests", "Index", new { status = -1 }, new { @class = "btn btn-info fa fa" })
                     @Html.ActionLink(" Rejected Requests", "Index", new { status = -1 }, new { @class = "btn btn-info fa fa" })*@
@@ -71,11 +70,11 @@
                         <td>@itm.Priority</td>
                        
                     <td>
-                        @if (itm.Req_Status == -1)
+                        @if (itm.Req_Status == 0)
                         {
-                            <label class="badge badge-info">Waiting</label>
+                            <label class="badge badge-info">Pending</label>
                         }
-                        else if (itm.Req_Status == 0)
+                        else if (itm.Req_Status == -1)
                         {
                             <label class="badge badge-danger">Rejected</label>
                         }
