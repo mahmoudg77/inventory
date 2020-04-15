@@ -41,7 +41,7 @@ namespace Inventory.Controllers
             db.Entry(req).State = EntityState.Modified;
             db.SaveChanges();
             
-            BLL.EmailHelper.SendMail(req.User.Email, "Request Status", "<strong>Dear, " + req.User.F_Name + " " + req.User.L_Name + "</strong><br/>Your request just approved.<br/>Thank you, <br/>");
+            //BLL.EmailHelper.SendMail(req.User.Email, "Request Status", "<strong>Dear, " + req.User.F_Name + " " + req.User.L_Name + "</strong><br/>Your request just approved.<br/>Thank you, <br/>");
 
             return Redirect("/Requests/Index");
         }
@@ -54,7 +54,7 @@ namespace Inventory.Controllers
             req.Req_Status = -1;
             db.Entry(req).State = EntityState.Modified;
             db.SaveChanges();
-            BLL.EmailHelper.SendMail(req.User.Email, "Request Status", "<strong>Dear, " + req.User.F_Name + " " + req.User.L_Name + "</strong><br/>Your request just approved.<br/>Thank you, <br/>");
+            //BLL.EmailHelper.SendMail(req.User.Email, "Request Status", "<strong>Dear, " + req.User.F_Name + " " + req.User.L_Name + "</strong><br/>Your request just approved.<br/>Thank you, <br/>");
 
             return Redirect("/Requests/Index");
         }

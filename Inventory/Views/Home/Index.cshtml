@@ -57,7 +57,7 @@
                         @if (UserSession.User.Usr_Type == 1)
                         {
 
-                            <div class="col-lg-3 col-6">
+                            <div class="col-lg-3 col-4">
                                 <!-- small card -->
                                 <div class="small-box bg-secondary">
                                     <div class="inner">
@@ -104,7 +104,7 @@
                                 <div class="icon">
                                     <i class="fas fa-clipboard-list"></i>
                                 </div>
-                                <a href="~/Requests/Index?status=-1" class="small-box-footer">
+                                <a href="~/Requests/Index?status=0" class="small-box-footer">
                                     More info <i class="fas fa-arrow-circle-right"></i>
                                 </a>
                             </div>
@@ -120,7 +120,7 @@
                                 <div class="icon">
                                     <i class="fas fa-times"></i>
                                 </div>
-                                <a href="~/Assets/Index" class="small-box-footer">
+                                <a href="~/Requests/Index?status=-1" class="small-box-footer">
                                     More info <i class="fas fa-arrow-circle-right"></i>
                                 </a>
                             </div>
@@ -241,7 +241,7 @@
                     /**/
                     data: [@Model.requests_app_count, @Model.requests_pen_count, @Model.requests_rej_count],
         /**/
-        backgroundColor: ['#00a65a', '#DC3545', '#f39c12'],
+        backgroundColor: ['#00a65a', '#007BFF', '#DC3545'],
                  }
                     ]
         }
