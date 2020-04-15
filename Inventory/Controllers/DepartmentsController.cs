@@ -10,6 +10,7 @@ using Inventory.Models;
 
 namespace Inventory.Controllers
 {
+    [RoleFilter(new int[] { 1, 2 })]
     public class DepartmentsController : Controller
     {
         private InventoryEntities db = new InventoryEntities();
@@ -55,11 +56,13 @@ namespace Inventory.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Dep_Id,Dep_Nam,Created_By,Updated_By,Created_At,Updated_At,Priority")] Department department)
+        public ActionResult Create([Bind(Include = "Dep_Id,Dep_Nam,Priority")] Department department) /*,Created_By,Updated_By,Created_At,Updated_At*/
         {
             if (ModelState.IsValid)
             {
                 db.Departments.Add(department);
+                department.Created_At = DateTime.Now;
+                department.Created_By = UserSession.User.F_Name + " " + UserSession.User.L_Name;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -92,6 +95,8 @@ namespace Inventory.Controllers
             if (ModelState.IsValid)
             {
                 db.Entry(department).State = EntityState.Modified;
+                department.Updated_At = DateTime.Now;
+                department.Updated_By = UserSession.User.F_Name + " " + UserSession.User.L_Name;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
