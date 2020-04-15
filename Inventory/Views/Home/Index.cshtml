@@ -41,8 +41,6 @@
                             <div class="small-box bg-info">
                                 <div class="inner">
                                     <h3>@Model.assets_count</h3>
-                                    @*@Model.Count()*@
-
 
                                     <p>Assets</p>
                                 </div>
@@ -54,22 +52,28 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="col-lg-3 col-6">
-                            <!-- small card -->
-                            <div class="small-box bg-warning">
-                                <div class="inner">
-                                    <h3>@Model.users_count</h3>
 
-                                    <p>Users</p>
+
+                        @if (UserSession.User.Usr_Type == 1)
+                        {
+
+                            <div class="col-lg-3 col-6">
+                                <!-- small card -->
+                                <div class="small-box bg-secondary">
+                                    <div class="inner">
+                                        <h3>@Model.users_count</h3>
+
+                                        <p>Users</p>
+                                    </div>
+                                    <div class="icon">
+                                        <i class="fas fa-user-plus"></i>
+                                    </div>
+                                    <a href="~/Users/Index" class="small-box-footer">
+                                        More info <i class="fas fa-arrow-circle-right"></i>
+                                    </a>
                                 </div>
-                                <div class="icon">
-                                    <i class="fas fa-user-plus"></i>
-                                </div>
-                                <a href="~/Users/Index" class="small-box-footer">
-                                    More info <i class="fas fa-arrow-circle-right"></i>
-                                </a>
                             </div>
-                        </div>
+                        }
                         <!-- ./col -->
                         <div class="col-lg-3 col-6">
                             <!-- small card -->
@@ -91,7 +95,7 @@
                         <!-- ./col -->
                         <div class="col-lg-3 col-6">
                             <!-- small card -->
-                            <div class="small-box bg-danger">
+                            <div class="small-box bg-primary">
                                 <div class="inner">
                                     <h3>@Model.requests_pen_count</h3>
 
@@ -105,6 +109,23 @@
                                 </a>
                             </div>
                         </div>
+                        <div class="col-lg-3 col-6">
+                            <!-- small card -->
+                            <div class="small-box bg-danger">
+                                <div class="inner">
+                                    <h3>@Model.requests_rej_count</h3>
+
+                                    <p>Rejected Request</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-times"></i>
+                                </div>
+                                <a href="~/Assets/Index" class="small-box-footer">
+                                    More info <i class="fas fa-arrow-circle-right"></i>
+                                </a>
+                            </div>
+                        </div>
+
                         <!-- ./col -->
                     </div>
                     <!-- /.row -->

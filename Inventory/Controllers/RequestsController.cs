@@ -18,19 +18,21 @@ namespace Inventory.Controllers
         // GET: Requests
         public ActionResult Index(int? status)
         {
+            var requests = db.Requests.Include(r => r.Asset).Include(r => r.User);
             if (status != null)
             {
 
-            var requests = db.Requests.Include(r => r.Asset).Include(r => r.User).Where(a=>a.Req_Status==status);
-            return View(requests.ToList());
+                requests = requests.Where(a=>a.Req_Status==status);
             }
-            else
+            if (UserSession.User.Usr_Type == 3)
             {
-            var requests = db.Requests.Include(r => r.Asset).Include(r => r.User);
-
-            return View(requests.ToList());
+                requests = requests.Where(a => a.Usr_Id == UserSession.User.Usr_Id);
             }
+            return View(requests.ToList());
+           
         }
+        [RoleFilter(new int[] { 1, 2 })]
+
         public ActionResult Approve(int ID)
         {
             var req = db.Requests.Find(ID);
@@ -38,9 +40,13 @@ namespace Inventory.Controllers
             req.Req_Status =1;
             db.Entry(req).State = EntityState.Modified;
             db.SaveChanges();
+            
+            BLL.EmailHelper.SendMail(req.User.Email, "Request Status", "<strong>Dear, " + req.User.F_Name + " " + req.User.L_Name + "</strong><br/>Your request just approved.<br/>Thank you, <br/>");
+
             return Redirect("/Requests/Index");
         }
-        
+        [RoleFilter(new int[] { 1, 2 })]
+
         public ActionResult Reject(int ID)
         {
             var req = db.Requests.Find(ID);
@@ -48,6 +54,8 @@ namespace Inventory.Controllers
             req.Req_Status = -1;
             db.Entry(req).State = EntityState.Modified;
             db.SaveChanges();
+            BLL.EmailHelper.SendMail(req.User.Email, "Request Status", "<strong>Dear, " + req.User.F_Name + " " + req.User.L_Name + "</strong><br/>Your request just approved.<br/>Thank you, <br/>");
+
             return Redirect("/Requests/Index");
         }
 
@@ -61,6 +69,8 @@ namespace Inventory.Controllers
         }
 
         // GET: Requests/Details/5
+        [RoleFilter(new int[] { 1, 2 })]
+
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -98,7 +108,11 @@ namespace Inventory.Controllers
                 request.Created_By = UserSession.User.F_Name + UserSession.User.L_Name;
                 request.Created_At = DateTime.Now;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                string[] emails = db.Users.Where(a => a.Usr_Type == 1).Select(a => a.Email).ToArray();
+                BLL.EmailHelper.SendMail(String.Join(";", emails), "New Request", "<strong>Dear, SmartStock Admins</strong><br/>Please approved my urgent requeest <br/>Thank you, <br/> ");
+
+
+                return Redirect("/Requests/Index");
             }
 
             //ViewBag.Ast_Id = new SelectList(db.Assets, "Ast_Id", "Ser_Num", request.Ast_Id);
@@ -170,7 +184,7 @@ namespace Inventory.Controllers
             Request request = db.Requests.Find(id);
             db.Requests.Remove(request);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return Redirect("/Requests/Index");
         }
 
         protected override void Dispose(bool disposing)

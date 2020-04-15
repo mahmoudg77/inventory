@@ -312,13 +312,13 @@ namespace Inventory.Controllers
         [HttpPost, ActionName("Login")]
         [GRecaptcha]
         [ValidateAntiForgeryToken]
-        public ActionResult postLogin(Requests2.LoginRequest request, string next = "/")
+        public ActionResult postLogin(Requests.LoginRequest request, string next = "/")
         {
-           if(!ModelState.IsValid)
+          /* if(!ModelState.IsValid)
             {
                 ViewBag.error = ModelState.First().Value.Errors.Last().ErrorMessage;
                 return View();
-            }
+            }*/
             if (!Regex.IsMatch(request.Email, @"^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$"))
             {
                 ViewBag.error = "Invalid Email Format !";
