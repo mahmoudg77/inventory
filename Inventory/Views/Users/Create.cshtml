@@ -66,16 +66,16 @@
                     <legend>Security Data:</legend>
                     <div class="row form-group">
                         @Html.LabelFor(model => model.Created_By, "Email :", htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-4">
+                        <div class="col-md-10">
                             @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.Created_By, "", new { @class = "text-danger" })
                         </div>
 
-                        @Html.LabelFor(model => model.Created_By, "Password :", htmlAttributes: new { @class = "control-label col-md-2" })
+                        @*@Html.LabelFor(model => model.Created_By, "Password :", htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-4">
                             @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.Created_By, "", new { @class = "text-danger" })
-                        </div>
+                        </div>*@
 
                     </div>
                     <div class="row form-group">
@@ -84,9 +84,9 @@
                             @Html.DropDownList("Usr_Type", null, htmlAttributes: new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.Usr_Type, "", new { @class = "text-danger" })
                         </div>
-                        @Html.LabelFor(model => model.Status, "Status :", htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.LabelFor(model => model.Status, "Active? :", htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-4">
-                            @Html.CheckBox("Status", htmlAttributes: new { @class = "" })
+                            @Html.CheckBox("Status",true, htmlAttributes: new { @class = "" })
                             @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
                         </div>
                     </div>

@@ -8,6 +8,7 @@ using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using Inventory.Models;
+using Inventory.Requests;
 
 namespace Inventory.Controllers
 {
@@ -48,6 +49,22 @@ namespace Inventory.Controllers
             }
             return View(user);
         }
+        // GET: Users/ChangePassword
+        [LoginFilter]
+        [HttpGet]
+        public ActionResult ChangePassword()
+        {
+                     
+            return View();
+        }
+        // POST: Users/ChangePassword
+        [LoginFilter]
+        [HttpPost]
+        public ActionResult ChangePassword(ChangePasswordRequest request)
+        {
+                     
+            return View();
+        }
 
         // GET: Users/Create
         [RoleFilter(new int[] { 1 })]
@@ -65,12 +82,12 @@ namespace Inventory.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [RoleFilter(new int[] { 1 })]
-        public ActionResult Create([Bind(Include = "Usr_Id,Usr_Type,F_Name,L_Name,Pho_Num,Dep_Id,Password,Email")] User user)
+        public ActionResult Create([Bind(Include = "Usr_Id,Usr_Type,F_Name,L_Name,Pho_Num,Dep_Id,Email")] User user)
         {
             if (ModelState.IsValid)
             {
                 db.Users.Add(user);
-                var password = user.Password;
+                var password = BLL.SecurityHelper.GeneratePassword();
 
                 user.Password = BLL.SecurityHelper.MD5(password);
                 user.Created_At = DateTime.Now;
