@@ -105,7 +105,7 @@ namespace Inventory.Controllers
             {
                 db.Requests.Add(request);
                 request.Usr_Id = UserSession.User.Usr_Id;
-                request.Created_By = UserSession.User.F_Name + UserSession.User.L_Name;
+                request.Created_By = UserSession.User.F_Name + " " + UserSession.User.L_Name;
                 request.Created_At = DateTime.Now;
                 db.SaveChanges();
                 string[] emails = db.Users.Where(a => a.Usr_Type == 1).Select(a => a.Email).ToArray();
@@ -150,7 +150,7 @@ namespace Inventory.Controllers
             {
                 db.Entry(request).State = EntityState.Modified;
                 request.Updated_At = DateTime.Now;
-                request.Updated_By = UserSession.User.F_Name + UserSession.User.L_Name;
+                request.Updated_By = UserSession.User.F_Name + " " + UserSession.User.L_Name;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
