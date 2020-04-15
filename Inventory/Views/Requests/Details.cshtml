@@ -5,7 +5,7 @@
 }
 
 
-    <title>Request Details</title>
+<title>Request Details</title>
 
 <style type="text/css">
     dt {
@@ -28,63 +28,63 @@
     </div><!-- /.container-fluid -->
 </section>
 
-    <section class="content">
-        <div class="card bg-light mb-3">
-            <div class="card-body">
-                <dl class="dl-horizontal">
+<section class="content">
+    <div class="card bg-light mb-3">
+        <div class="card-body">
+            <dl class="dl-horizontal">
 
-                    <dt>
-                        @Html.DisplayName("Request Number :")
-                    </dt>
+                <dt>
+                    @Html.DisplayName("Request Number :")
+                </dt>
 
-                    <dd>
-                        @Html.DisplayFor(model => model.Req_Id)
-                    </dd>
+                <dd class="col col-md-4 form-control">
+                    @Html.DisplayFor(model => model.Req_Id)
+                </dd>
 
-                    <dt>
-                        @Html.DisplayName("User :")
-                    </dt>
+                <dt>
+                    @Html.DisplayName("User :")
+                </dt>
 
-                    <dd>
-                        @Html.DisplayFor(model => model.User.F_Name)
-                    </dd>
+                <dd class="col col-md-4 form-control">
+                    @Html.DisplayFor(model => model.User.F_Name)
+                </dd>
 
-                    <dt>
-                        @Html.DisplayName("Assets Type :")
-                    </dt>
+                <dt>
+                    @Html.DisplayName("Assets Type :")
+                </dt>
 
-                    <dd>
-                        @Html.DisplayFor(model => model.Asset.Ast_Type)
-                    </dd>
+                <dd class="col col-md-4 form-control">
+                    @Html.DisplayFor(model => model.Asset.Ast_Type)
+                </dd>
 
-                    <dt>
-                        @Html.DisplayName("Serial Number :")
-                    </dt>
+                <dt>
+                    @Html.DisplayName("Serial Number :")
+                </dt>
 
-                    <dd>
-                        @Html.DisplayFor(model => model.Asset.Ser_Num)
-                    </dd>
+                <dd class="col col-md-4 form-control">
+                    @Html.DisplayFor(model => model.Asset.Ser_Num)
+                </dd>
 
-                    <dt>
-                        @Html.DisplayName("Priority :")
-                    </dt>
+                <dt>
+                    @Html.DisplayName("Priority :")
+                </dt>
 
-                    <dd>
-                        @Html.DisplayFor(model => model.Priority)
-                    </dd>
+                <dd class="col col-md-4 form-control">
+                    @Html.DisplayFor(model => model.Priority)
+                </dd>
 
-                </dl>
-            </div>
-
-            <div>
-                <a class="btn btn-success btn-sm fa fa-pencil" href="@Url.Action("Approve","Requests",new { ID = Model.Req_Id })" class="editRequest"> Approve</a> |
-
-                <a class="btn btn-danger btn-sm fa fa-trash" href="@Url.Action("Reject","Requests",new { ID = Model.Req_Id })" class="editRequest"> Reject</a>
-
-            </div>
+            </dl>
         </div>
-        <p>
 
-            @Html.ActionLink("Back to List", "Index")
-        </p>
-    </section>
+        <div class="form-actions col-md-offset-2 col-md-10" style="padding-bottom: 10px">
+            <a class="btn btn-success btn-sm fa fa-pencil" href="@Url.Action("Approve","Requests",new { ID = Model.Req_Id })" class="editRequest"> Approve</a> |
+
+            <a class="btn btn-danger btn-sm fa fa-trash" href="@Url.Action("Reject","Requests",new { ID = Model.Req_Id })" class="editRequest"> Reject</a>
+
+        </div>
+    </div>
+    <p>
+
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</section>
