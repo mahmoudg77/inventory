@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
@@ -62,7 +63,47 @@ namespace Inventory.Controllers
         [HttpPost]
         public ActionResult ChangePassword(ChangePasswordRequest request)
         {
-                     
+            if (ModelState.IsValid)
+            {
+                if (BLL.SecurityHelper.MD5(request.curPassword) != UserSession.User.Password)
+                {
+
+                    ModelState.AddModelError("curPassword","Incorrect current password!");
+                    return View();
+                }
+
+                if (request.newPassword != request.conPassword)
+                {
+                    ModelState.AddModelError("conPassword", "Password and confirm password not match!");
+
+                    return View();
+                }
+
+                var u = db.Users.Find(UserSession.User.Usr_Id);
+
+                u.Password = BLL.SecurityHelper.MD5(request.newPassword);
+
+                db.Entry(u).State = EntityState.Modified;
+
+                try
+                {
+                    if (db.SaveChanges() < 0)
+                    {
+                        ViewBag.error = "Password and confirm password not match!";
+                        return View();
+                    }
+                    ViewBag.message = "Your password changed successfully";
+                    return View();
+                }
+                catch (DbEntityValidationException ex)
+                {
+                    ViewBag.error = ex.Message;
+                    return View();
+
+                }
+                
+            }
+
             return View();
         }
 
@@ -363,6 +404,13 @@ namespace Inventory.Controllers
         {
             UserSession.Logout();
             return Redirect("/Users/Login");
+        }
+
+        [LoginFilter]
+        [HttpPost]
+        public ActionResult SuggestPassword()
+        {
+            return Content( BLL.SecurityHelper.GeneratePassword(),"text/plain");
         }
 
     }

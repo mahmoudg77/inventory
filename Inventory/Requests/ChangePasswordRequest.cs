@@ -11,7 +11,6 @@ namespace Inventory.Requests
         [Required(ErrorMessage ="Current Password is required!")]
         public string curPassword { get; set; }
 
-
         [Required(ErrorMessage ="New Password is required!")]
         public string newPassword { get; set; }
         
