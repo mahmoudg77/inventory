@@ -1965,6 +1965,7 @@
     <Content Include=".well-known\acme-challenge\coYfx_nK6KpOFsyJjZI6enjEc_bBpr43JMimQmKHW_I" />
     <Content Include=".well-known\acme-challenge\Web.config" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\chosen.jquery.min.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
