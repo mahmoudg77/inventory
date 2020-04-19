@@ -89,7 +89,7 @@ namespace Inventory.BLL
 
                 SmtpClient.Credentials = new System.Net.NetworkCredential(username, password);
 
-                SmtpClient.EnableSsl = true;
+                SmtpClient.EnableSsl = false;
                 // Default port will be 25
 
                 // From address will be given as a MailAddress Object
